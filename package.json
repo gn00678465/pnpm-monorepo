@@ -8,6 +8,7 @@
     "format": "prettier --write .",
     "prepare": "husky",
     "test": "vitest",
+    "coverage": "vitest run --coverage",
     "utility": "pnpm --filter monorepo-utility"
   },
   "keywords": [],
@@ -25,6 +26,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
     "husky": "^9.0.11",
+    "jsdom": "^24.0.0",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "vitest": "^1.4.0"

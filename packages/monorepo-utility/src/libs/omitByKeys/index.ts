@@ -1,11 +1,11 @@
 export function omitByKeys<T extends object, K extends keyof T>(
-  obj: T,
-  propNames: ReadonlyArray<K>
+  propNames: ReadonlyArray<K>,
+  obj: T
 ): Omit<T, K>;
 
 export function omitByKeys<T extends object, K extends keyof T>(
-  obj: T,
-  props: ReadonlyArray<K>
+  props: ReadonlyArray<K>,
+  obj: T
 ): Omit<T, K> {
   if (props.length === 0) {
     // No props to omit at all!
