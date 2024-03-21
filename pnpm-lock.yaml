@@ -54,6 +54,12 @@ importers:
         specifier: ^3.7.3
         version: 3.7.3(@types/node@20.11.28)(typescript@5.4.2)(vite@5.1.6)
 
+  packages/type-utility:
+    devDependencies:
+      utility-types:
+        specifier: ^3.11.0
+        version: 3.11.0
+
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:
@@ -3190,6 +3196,11 @@ packages:
     dependencies:
       querystringify: 2.2.0
       requires-port: 1.0.0
+    dev: true
+
+  /utility-types@3.11.0:
+    resolution: {integrity: sha512-6Z7Ma2aVEWisaL6TvBCy7P8rm2LQoPv6dJ7ecIaIixHcwfbJ0x7mWdbcwlIM5IGQxPZSFYeqRCqlOOeKoJYMkw==}
+    engines: {node: '>= 4'}
     dev: true
 
   /v8-to-istanbul@9.2.0:
