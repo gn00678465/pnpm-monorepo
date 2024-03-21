@@ -10,7 +10,8 @@
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "utility": "pnpm --filter @pnpm-monorepo/utility",
-    "types-utility": "pnpm --filter @pnpm-monorepo/types-utility"
+    "types-utility": "pnpm --filter @pnpm-monorepo/types-utility",
+    "axios": "pnpm --filter @pnpm-monorepo/axios"
   },
   "keywords": [],
   "author": "",
