@@ -9,8 +9,9 @@
     "prepare": "husky",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "utility": "pnpm --filter monorepo-utility",
-    "axios": "pnpm --filter monorepo-axios"
+    "utility": "pnpm --filter @pnpm-monorepo/utility",
+    "types-utility": "pnpm --filter @pnpm-monorepo/types-utility",
+    "axios": "pnpm --filter @pnpm-monorepo/axios"
   },
   "keywords": [],
   "author": "",
