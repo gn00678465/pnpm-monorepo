@@ -1,10 +1,4 @@
-import type {
-  AxiosError,
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-  InternalAxiosRequestConfig
-} from 'axios';
+import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
 
 export interface RequestOption<ResponseData = unknown> {
   onRequest: (

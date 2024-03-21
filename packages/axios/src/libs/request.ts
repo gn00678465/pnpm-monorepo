@@ -51,6 +51,9 @@ function createCommonRequest<ResponseData = unknown>(
 
   instance.interceptors.response.use(
     async (response) => {
+      if (response.status >= 200 && response.status < 300) {
+        return Promise.reject(response);
+      }
       return Promise.resolve(response);
     },
     async (error: AxiosError<ResponseData>) => {
