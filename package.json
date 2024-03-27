@@ -11,7 +11,10 @@
     "coverage": "vitest run --coverage",
     "utility": "pnpm --filter @pnpm-monorepo/utility",
     "types-utility": "pnpm --filter @pnpm-monorepo/types-utility",
-    "axios": "pnpm --filter @pnpm-monorepo/axios"
+    "axios": "pnpm --filter @pnpm-monorepo/axios",
+    "docs": "pnpm --filter @pnpm-monorepo/docs dev",
+    "docs:dev": "pnpm --filter @pnpm-monorepo/docs dev",
+    "docs:build": "pnpm --filter @pnpm-monorepo/docs build"
   },
   "keywords": [],
   "author": "",
