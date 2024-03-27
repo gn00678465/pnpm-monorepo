@@ -12,6 +12,9 @@ export function createAxiosConfig(config?: Partial<CreateAxiosDefaults>) {
     timeout: 10 * 1000,
     headers: {
       'Content-Type': 'application/json'
+    },
+    validateStatus: function (status) {
+      return status >= 200 && status < 300;
     }
   };
 
