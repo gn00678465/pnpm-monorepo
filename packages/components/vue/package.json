@@ -1,0 +1,21 @@
+{
+  "name": "@pnpm-monorepo/vue-components",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "vue": "^3.4.21"
+  },
+  "exports": {
+    ".": "./src/main.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./src/*"
+      ]
+    }
+  }
+}

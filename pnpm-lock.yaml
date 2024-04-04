@@ -84,6 +84,9 @@ importers:
       '@pnpm-monorepo/unocss':
         specifier: workspace:*
         version: link:../../../packages/unocss
+      '@pnpm-monorepo/vue-components':
+        specifier: workspace:*
+        version: link:../../../packages/components/vue
       '@unhead/vue':
         specifier: ^1.9.4
         version: 1.9.4(vue@3.4.21)
@@ -154,6 +157,12 @@ importers:
       nanoid:
         specifier: ^5.0.6
         version: 5.0.6
+
+  packages/components/vue:
+    dependencies:
+      vue:
+        specifier: ^3.4.21
+        version: 3.4.21(typescript@5.4.3)
 
   packages/type-utility:
     devDependencies:

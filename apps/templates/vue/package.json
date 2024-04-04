@@ -14,6 +14,7 @@
   "dependencies": {
     "@pnpm-monorepo/axios": "workspace:*",
     "@pnpm-monorepo/unocss": "workspace:*",
+    "@pnpm-monorepo/vue-components": "workspace:*",
     "@unhead/vue": "^1.9.4",
     "@unocss/reset": "0.59.0-beta.1",
     "pinia": "^2.1.7",
