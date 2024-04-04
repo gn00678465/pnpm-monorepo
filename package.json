@@ -15,7 +15,8 @@
     "axios": "pnpm --filter @pnpm-monorepo/axios",
     "docs": "pnpm --filter @pnpm-monorepo/docs dev",
     "docs:dev": "pnpm --filter @pnpm-monorepo/docs dev",
-    "docs:build": "pnpm --filter @pnpm-monorepo/docs build"
+    "docs:build": "pnpm --filter @pnpm-monorepo/docs build",
+    "vue-template": "pnpm --filter @pnpm-monorepo/vue-template"
   },
   "keywords": [],
   "author": "",
@@ -40,5 +41,8 @@
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "vitest": "^1.4.0"
+  },
+  "dependencies": {
+    "taze": "^0.13.3"
   }
 }
