@@ -12,12 +12,13 @@
     "up": "taze major -I"
   },
   "dependencies": {
+    "@pnpm-monorepo/axios": "workspace:*",
+    "@pnpm-monorepo/unocss": "workspace:*",
     "@unhead/vue": "^1.9.4",
     "@unocss/reset": "0.59.0-beta.1",
     "pinia": "^2.1.7",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0",
-    "@pnpm-monorepo/axios": "workspace:*"
+    "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
@@ -29,6 +30,7 @@
     "unplugin-vue-router": "^0.8.5",
     "vite": "^5.2.0",
     "vite-plugin-inspect": "^0.8.3",
+    "vite-plugin-pwa": "^0.19.7",
     "vite-plugin-vue-devtools": "^7.0.25",
     "vite-plugin-vue-layouts": "^0.11.0",
     "vite-plugin-webfont-dl": "^3.9.2",
@@ -36,7 +38,7 @@
   },
   "msw": {
     "workerDirectory": [
-      "src/mocks"
+      "public"
     ]
   }
 }

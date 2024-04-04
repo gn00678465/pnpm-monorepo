@@ -5,20 +5,22 @@ import './styles/main.css';
 import 'uno.css';
 
 import App from './App.vue';
-import { setupRouter } from './router';
-// import { enableMocking } from './mocks';
+import { setupRouter, router } from './router';
+import { enableMocking } from './mocks/index';
 import type { UserModule } from './types';
 
 async function setupApp() {
-  // await enableMocking();
+  // mock data by msw
+  await enableMocking();
 
   const app = createApp(App);
 
+  // install all plugins under `plugins/`
   Object.values(
     import.meta.glob<{ install: UserModule }>('./plugins/*.ts', {
       eager: true
     })
-  ).forEach((i) => i?.install({ app }));
+  ).forEach((i) => i?.install({ app, router }));
 
   await setupRouter(app);
 

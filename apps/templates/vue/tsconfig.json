@@ -23,14 +23,23 @@
     "types": [
       "unplugin-vue-macros/macros-global",
       "unplugin-vue-router/client",
-      "vite-plugin-vue-layouts/client"
+      "vite-plugin-vue-layouts/client",
+      "vite-plugin-pwa/client"
     ]
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "./typed-router.d.ts"
+    "./typed-router.d.ts",
+    "src/mocks/handlers.ts"
   ],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "vueCompilerOptions": {
+    "plugins": [
+      "@vue-macros/volar/define-models",
+      "@vue-macros/volar/define-slots"
+    ]
+  },
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "exclude": ["dist", "node_modules", "cypress"]
 }

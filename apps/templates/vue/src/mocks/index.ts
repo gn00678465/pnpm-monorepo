@@ -5,5 +5,9 @@ export async function enableMocking() {
 
   const { worker } = await import('./browser');
 
-  return worker.start();
+  // https://mswjs.io/docs/api/setup-worker/start
+  return await worker.start({
+    quiet: true,
+    onUnhandledRequest: 'bypass'
+  });
 }
