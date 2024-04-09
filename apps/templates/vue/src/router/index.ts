@@ -6,11 +6,14 @@ import {
   createWebHashHistory,
   createWebHistory
 } from 'vue-router/auto';
+import type { RouteRecordRaw } from 'vue-router/auto';
 import { setupLayouts } from 'virtual:generated-layouts';
 
 export const router = createRouter({
   history: createWebHistory(),
-  extendRoutes: (routes) => setupLayouts(routes)
+  extendRoutes: (routes: RouteRecordRaw[]) => {
+    return [...setupLayouts(routes)];
+  }
 });
 
 /** Setup Vue Router */

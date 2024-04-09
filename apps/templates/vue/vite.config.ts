@@ -8,6 +8,7 @@ import VueDevTools from 'vite-plugin-vue-devtools';
 import WebfontDownload from 'vite-plugin-webfont-dl';
 import Unocss from 'unocss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import VueI18n from '@intlify/unplugin-vue-i18n/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -33,7 +34,8 @@ export default defineConfig({
       root: __dirname,
       plugins: {
         vue: vue()
-      }
+      },
+      betterDefine: false
     }),
 
     // https://github.com/johncampionjr/vite-plugin-vue-layouts?tab=readme-ov-file#configuration
@@ -74,6 +76,14 @@ export default defineConfig({
           }
         ]
       }
+    }),
+
+    // https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n
+    VueI18n({
+      runtimeOnly: true,
+      compositionOnly: true,
+      fullInstall: true,
+      include: [resolve(__dirname, 'locales/**')]
     }),
 
     // https://github.com/feat-agency/vite-plugin-webfont-dl

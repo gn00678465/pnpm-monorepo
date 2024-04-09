@@ -11,13 +11,13 @@
       <div class="sk-cube sk-cube8"></div>
       <div class="sk-cube sk-cube9"></div>
     </div>
-    <div class="title">Loading<dot>...</dot></div>
+    <div class="title">Loading<span>...</span></div>
     <div class="sub-title">{{ subTitle }}</div>
   </div>
 </template>
 
 <script lang="ts">
-interface Props {
+export interface CubeLoadingProps {
   subTitle?: string;
 }
 </script>
@@ -25,7 +25,7 @@ interface Props {
 <script setup lang="ts">
 import { toRefs } from 'vue';
 
-const props = defineProps<Props>();
+const props = defineProps<CubeLoadingProps>();
 
 const { subTitle } = toRefs(props);
 </script>
