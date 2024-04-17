@@ -1,5 +1,4 @@
 // @unocss-include
-
 import {
   presetAttributify,
   presetIcons,
@@ -28,7 +27,7 @@ export const config: UserConfig = {
     presetWebFonts({
       provider: 'google',
       fonts: {
-        sans: 'Roboto',
+        sans: ['Noto Sans TC', 'Roboto'],
         mono: ['Fira Code', 'Fira Mono:400,700']
       }
     })
