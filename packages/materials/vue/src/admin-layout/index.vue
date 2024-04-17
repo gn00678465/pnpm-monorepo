@@ -126,7 +126,7 @@ function handleClickMask() {
 </script>
 
 <template>
-  <div :style="cssVars" :class="['relative h-full', commonClass]">
+  <div :style="cssVars" class="relative h-full" :class="[commonClass]">
     <div
       :id="isWrapperScroll ? scrollId : undefined"
       class="flex h-full flex-col"
@@ -265,6 +265,4 @@ function handleClickMask() {
   </div>
 </template>
 
-<style scoped>
-@import url('./styles/utility.css');
-</style>
+<style scoped src="./styles/style.css"></style>
