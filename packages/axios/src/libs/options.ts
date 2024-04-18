@@ -1,5 +1,6 @@
 import type { CreateAxiosDefaults } from 'axios';
 import type { IAxiosRetryConfig } from 'axios-retry';
+import { stringify } from 'qs';
 import type { RequestOption } from './types';
 
 /**
@@ -15,6 +16,9 @@ export function createAxiosConfig(config?: Partial<CreateAxiosDefaults>) {
     },
     validateStatus: function (status) {
       return status >= 200 && status < 300;
+    },
+    paramsSerializer: (params) => {
+      return stringify(params);
     }
   };
 
