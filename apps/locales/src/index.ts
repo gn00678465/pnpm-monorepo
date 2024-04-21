@@ -1,4 +1,4 @@
-import { I18nToolkit } from './config';
+import { I18nToolkit } from '@pnpm-monorepo/locale-kit';
 import credentials from '../credentials.json';
 import dotenv from 'dotenv';
 

@@ -1,0 +1,23 @@
+{
+  "name": "@pnpm-monorepo/locale-kit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "google-sheet-languages-model": "^0.1.5",
+    "googleapis": "^134.0.0"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./src/*"
+      ]
+    }
+  }
+}
