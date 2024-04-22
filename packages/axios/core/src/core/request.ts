@@ -25,10 +25,10 @@ function createCommonRequest<ResponseData = unknown>(
   const _axiosConfig = createAxiosConfig(axiosConfig);
   const instance = axios.create(_axiosConfig);
 
-  const abortControllerMap = new Map<string, AbortController>();
+  // const abortControllerMap = new Map<string, AbortController>();
 
   // config axios retry
-  const retryOptions = createRetryOptions(_axiosConfig);
+  const retryOptions = createRetryOptions(opts.retries, _axiosConfig);
   axiosRetry(instance, retryOptions);
 
   instance.interceptors.request.use((conf) => {
@@ -39,9 +39,9 @@ function createCommonRequest<ResponseData = unknown>(
     config.headers.set(REQUEST_ID_KEY, requestId);
 
     // config abort
-    const abortController = new AbortController();
-    config.signal = abortController.signal;
-    abortControllerMap.set(requestId, abortController);
+    // const abortController = new AbortController();
+    // config.signal = abortController.signal;
+    // abortControllerMap.set(requestId, abortController);
 
     // handle config by hook
     const handledConfig = opts.onRequest?.(config) || config;
@@ -59,25 +59,25 @@ function createCommonRequest<ResponseData = unknown>(
     }
   );
 
-  function cancelRequest(requestId: string) {
-    const abortController = abortControllerMap.get(requestId);
-    if (abortController) {
-      abortController.abort();
-      abortControllerMap.delete(requestId);
-    }
-  }
+  // function cancelRequest(requestId: string) {
+  //   const abortController = abortControllerMap.get(requestId);
+  //   if (abortController) {
+  //     abortController.abort();
+  //     abortControllerMap.delete(requestId);
+  //   }
+  // }
 
-  function cancelAllRequest() {
-    abortControllerMap.forEach((abortController) => {
-      abortController.abort();
-    });
-    abortControllerMap.clear();
-  }
+  // function cancelAllRequest() {
+  //   abortControllerMap.forEach((abortController) => {
+  //     abortController.abort();
+  //   });
+  //   abortControllerMap.clear();
+  // }
 
   return {
-    instance,
-    cancelRequest,
-    cancelAllRequest
+    instance
+    // cancelRequest,
+    // cancelAllRequest
   };
 }
 
@@ -92,8 +92,7 @@ export function createRequest<ResponseData = unknown>(
   axiosConfig?: CreateAxiosDefaults,
   options?: Partial<RequestOption<ResponseData>>
 ) {
-  const { instance, cancelRequest, cancelAllRequest } =
-    createCommonRequest<ResponseData>(axiosConfig, options);
+  const { instance } = createCommonRequest<ResponseData>(axiosConfig, options);
 
   const request = async function request<TR = unknown>(
     config: AxiosRequestConfig
@@ -101,9 +100,6 @@ export function createRequest<ResponseData = unknown>(
     const response: AxiosResponse<TR> = await instance(config);
     return response;
   };
-
-  request.cancelRequest = cancelRequest;
-  request.cancelAllRequest = cancelAllRequest;
 
   return request;
 }

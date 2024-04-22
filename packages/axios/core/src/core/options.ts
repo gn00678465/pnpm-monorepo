@@ -33,9 +33,12 @@ export function createAxiosConfig(config?: Partial<CreateAxiosDefaults>) {
  * @param config
  * @returns
  */
-export function createRetryOptions(config?: Partial<CreateAxiosDefaults>) {
+export function createRetryOptions(
+  retries: number,
+  config?: Partial<CreateAxiosDefaults>
+) {
   const retryConfig: IAxiosRetryConfig = {
-    retries: 3
+    retries: retries
   };
 
   Object.assign(retryConfig, config);
@@ -47,6 +50,7 @@ export function createDefaultOptions<ResponseData = unknown>(
   options?: Partial<RequestOption<ResponseData>>
 ) {
   const opts: RequestOption<ResponseData> = {
+    retries: 0,
     onRequest: async (config) => config,
     onError: async () => {}
   };
