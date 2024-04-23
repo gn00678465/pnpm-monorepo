@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@pnpm-monorepo/axios": "workspace:*",
+    "@pnpm-monorepo/vue-axios": "workspace:*",
     "@pnpm-monorepo/unocss": "workspace:*",
     "@pnpm-monorepo/vue-components": "workspace:*",
     "@unhead/vue": "^1.9.4",

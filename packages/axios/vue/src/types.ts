@@ -1,10 +1,15 @@
 import type { Ref, ShallowRef } from 'vue';
-import type { AxiosResponse } from 'axios';
+import type { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
+
+export type UseAxiosInstance =
+  | AxiosInstance
+  | (<T, R, D>(config: AxiosRequestConfig<D>) => Promise<R>);
 
 /**
  * request composable
  */
-export interface UseAxiosOptions<T> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export interface UseAxiosOptions<T = any> {
   /**
    * Use shallowRef.
    *
@@ -38,18 +43,20 @@ export interface UseAxiosOptions<T> {
   onFinish?: () => void;
 }
 
-export type UseAxiosReturn<T, U> = {
+export type UseAxiosReturn<T, R, D> = {
   /**
    * Axios Response
    */
   response: ShallowRef<AxiosResponse<T> | undefined>;
   data: Ref<T | undefined>;
+  error: ShallowRef<unknown | undefined>;
   execute: (
-    arg?: U,
+    arg?: D,
     options?: Pick<UseAxiosOptions<T>, 'onError' | 'onSuccess' | 'onFinish'>
-  ) => Promise<void>;
+  ) => Promise<UseAxiosReturn<T, R, D>>;
+
+  abort: (message?: string) => void;
   isFinished: Ref<boolean>;
   isLoading: Ref<boolean>;
-  error: ShallowRef<unknown | undefined>;
-  isAborted: Ref<boolean>;
+  isCanceled: Ref<boolean>;
 };

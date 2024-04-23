@@ -105,6 +105,9 @@ importers:
       '@pnpm-monorepo/unocss':
         specifier: workspace:*
         version: link:../../../packages/configs/unocss
+      '@pnpm-monorepo/vue-axios':
+        specifier: workspace:*
+        version: link:../../../packages/axios/vue
       '@pnpm-monorepo/vue-components':
         specifier: workspace:*
         version: link:../../../packages/components/vue
@@ -194,6 +197,9 @@ importers:
 
   packages/axios/vue:
     dependencies:
+      '@vueuse/shared':
+        specifier: ^10.9.0
+        version: 10.9.0(vue@3.4.21(typescript@5.4.3))
       axios:
         specifier: ^1.6.8
         version: 1.6.8
@@ -2393,6 +2399,9 @@ packages:
 
   '@vue/shared@3.4.21':
     resolution: {integrity: sha512-PuJe7vDIi6VYSinuEbUIQgMIRZGgM8e4R+G+/dQTk0X1NEdvgvvgv7m+rfmDH1gZzyA1OjjoWskvHlfRNfQf3g==}
+
+  '@vueuse/shared@10.9.0':
+    resolution: {integrity: sha512-Uud2IWncmAfJvRaFYzv5OHDli+FbOzxiVEQdLCKQKLyhz94PIyFC3CHcH7EDMwIn8NPtD06+PNbC/PiO0LGLtw==}
 
   JSONStream@1.3.5:
     resolution: {integrity: sha512-E+iruNOY8VV9s4JEbe1aNEm6MiszPRr/UfcHMz0TQh1BXSxHK+ASV1R6W4HpjBhSeS+54PIsAMCBmwD06LLsqQ==}
@@ -9364,6 +9373,13 @@ snapshots:
       vue: 3.4.21(typescript@5.4.3)
 
   '@vue/shared@3.4.21': {}
+
+  '@vueuse/shared@10.9.0(vue@3.4.21(typescript@5.4.3))':
+    dependencies:
+      vue-demi: 0.14.7(vue@3.4.21(typescript@5.4.3))
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
 
   JSONStream@1.3.5:
     dependencies:

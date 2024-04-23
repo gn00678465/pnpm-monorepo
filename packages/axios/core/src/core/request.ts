@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import type {
   AxiosResponse,
   CreateAxiosDefaults,
   InternalAxiosRequestConfig,
   AxiosError,
-  AxiosRequestConfig
+  AxiosRequestConfig,
+  AxiosInstance
 } from 'axios';
 import axiosRetry from 'axios-retry';
 import { nanoid } from 'nanoid';
@@ -16,14 +18,14 @@ import {
 import { REQUEST_ID_KEY } from './constant';
 import type { RequestOption } from './types';
 
-function createCommonRequest<ResponseData = unknown>(
+function createCommonRequest<ResponseData = any>(
   axiosConfig?: CreateAxiosDefaults,
   options?: Partial<RequestOption<ResponseData>>
 ) {
   const opts = createDefaultOptions<ResponseData>(options);
 
   const _axiosConfig = createAxiosConfig(axiosConfig);
-  const instance = axios.create(_axiosConfig);
+  const instance: AxiosInstance = axios.create(_axiosConfig);
 
   // const abortControllerMap = new Map<string, AbortController>();
 
@@ -88,16 +90,18 @@ function createCommonRequest<ResponseData = unknown>(
  * @param options request options
  */
 
-export function createRequest<ResponseData = unknown>(
+export function createRequest<ResponseData = any>(
   axiosConfig?: CreateAxiosDefaults,
   options?: Partial<RequestOption<ResponseData>>
 ) {
   const { instance } = createCommonRequest<ResponseData>(axiosConfig, options);
 
-  const request = async function request<TR = unknown>(
-    config: AxiosRequestConfig
-  ) {
-    const response: AxiosResponse<TR> = await instance(config);
+  const request = async function request<
+    T = ResponseData,
+    R = AxiosResponse<T>,
+    D = any
+  >(config: AxiosRequestConfig<D>) {
+    const response = await instance<T, R, D>(config);
     return response;
   };
 
