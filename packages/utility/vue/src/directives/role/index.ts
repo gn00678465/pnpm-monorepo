@@ -18,7 +18,7 @@ export const vRole = {
     );
 
     app.directive('role', {
-      mounted(el, binding, vnode, prevVnode) {
+      mounted(el, binding) {
         const { arg, value } = binding;
         const hasRole = !arg || (value && permissionMap[value].includes(arg));
 
