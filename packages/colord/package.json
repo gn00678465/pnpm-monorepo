@@ -6,6 +6,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ant-design/colors": "^7.0.2",
     "colord": "^2.9.3"
   },
   "exports": {

@@ -212,6 +212,9 @@ importers:
 
   packages/colord:
     dependencies:
+      '@ant-design/colors':
+        specifier: ^7.0.2
+        version: 7.0.2
       colord:
         specifier: ^2.9.3
         version: 2.9.3
@@ -266,6 +269,9 @@ importers:
       vue:
         specifier: ^3.4.21
         version: 3.4.21(typescript@5.4.3)
+      vue-router:
+        specifier: ^4.3.0
+        version: 4.3.0(vue@3.4.21(typescript@5.4.3))
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^5.0.4
@@ -292,6 +298,9 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@ant-design/colors@7.0.2':
+    resolution: {integrity: sha512-7KJkhTiPiLHSu+LmMJnehfJ6242OCxSlR3xHVBecYxnMW8MS/878NXct1GqYARyL59fyeFdKRxXTfvR9SnDgJg==}
 
   '@antfu/install-pkg@0.1.1':
     resolution: {integrity: sha512-LyB/8+bSfa0DFGC06zpCEfs89/XoWZwws5ygEa5D+Xsm3OfI+aXQ86VgVG7Acyef+rSZ5HE7J8rrxzrQeM3PjQ==}
@@ -6677,6 +6686,10 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
+
+  '@ant-design/colors@7.0.2':
+    dependencies:
+      '@ctrl/tinycolor': 3.6.1
 
   '@antfu/install-pkg@0.1.1':
     dependencies:
