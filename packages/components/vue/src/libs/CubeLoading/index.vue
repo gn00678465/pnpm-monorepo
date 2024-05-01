@@ -1,5 +1,12 @@
 <template>
-  <div class="cube-loading select-none" id="loading" v-cloak>
+  <div
+    class="cube-loading select-none"
+    id="loading"
+    v-cloak
+    :style="{
+      '--cube-loading-bg': color
+    }"
+  >
     <div class="sk-cube-grid">
       <div class="sk-cube sk-cube1"></div>
       <div class="sk-cube sk-cube2"></div>
@@ -11,23 +18,31 @@
       <div class="sk-cube sk-cube8"></div>
       <div class="sk-cube sk-cube9"></div>
     </div>
-    <div class="title">Loading<span>...</span></div>
-    <div class="sub-title">{{ subTitle }}</div>
+    <div class="title">
+      <slot name="title">{{ title }}</slot>
+    </div>
+    <div v-if="description" class="description">
+      <slot name="description">{{ description }}</slot>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 export interface CubeLoadingProps {
-  subTitle?: string;
+  title?: string;
+  description?: string;
+  color?: string;
 }
 </script>
 
 <script setup lang="ts">
 import { toRefs } from 'vue';
 
-const props = defineProps<CubeLoadingProps>();
+const props = withDefaults(defineProps<CubeLoadingProps>(), {
+  color: '#495060'
+});
 
-const { subTitle } = toRefs(props);
+const { description, title } = toRefs(props);
 </script>
 
 <style scoped>
@@ -46,8 +61,6 @@ const { subTitle } = toRefs(props);
   position: relative;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  background: #eff2f5;
-  background-color: var(--a-bg-color);
   z-index: 100000;
   -webkit-transition:
     opacity 0.7s,
@@ -59,19 +72,20 @@ const { subTitle } = toRefs(props);
 }
 
 .cube-loading .title {
-  color: #495060;
+  color: var(--cube-loading-bg);
   font-weight: bold;
   font-size: 20px;
-  margin-top: 26px;
-  margin-bottom: 16px;
-  letter-spacing: 0.2em;
+  margin-top: 20px;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
 }
 
-.cube-loading .sub-title {
-  color: #495060;
+.cube-loading .description {
+  color: var(--cube-loading-bg);
   font-size: 16px;
-  line-height: 36px;
-  margin-bottom: 120px;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
 }
 
 .cube-loading .sk-cube-grid {
@@ -82,7 +96,7 @@ const { subTitle } = toRefs(props);
 .cube-loading .sk-cube-grid .sk-cube {
   width: 15px;
   height: 15px;
-  background-color: #495060;
+  background-color: var(--cube-loading-bg);
   float: left;
   -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
   animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;

@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import { vRole } from '@pnpm-monorepo/vue-utility';
 
 import '@unocss/reset/tailwind.css';
 import './styles/main.css';
@@ -14,6 +15,8 @@ async function setupApp() {
   await enableMocking();
 
   const app = createApp(App);
+
+  app.use(vRole, { permissions: ['admin', 'advanced', 'normal'] });
 
   // install all plugins under `plugins/`
   Object.values(

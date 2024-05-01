@@ -1,0 +1,22 @@
+{
+  "name": "@pnpm-monorepo/materials",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./src/*"
+      ]
+    }
+  },
+  "devDependencies": {
+    "typed-css-modules": "^0.9.1"
+  },
+  "dependencies": {}
+}

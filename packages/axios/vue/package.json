@@ -1,0 +1,23 @@
+{
+  "name": "@pnpm-monorepo/vue-axios",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vueuse/shared": "^10.9.0",
+    "axios": "^1.6.8",
+    "vue": "^3.4.21"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./src/*"
+      ]
+    }
+  }
+}
