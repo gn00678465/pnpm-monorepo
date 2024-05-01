@@ -10,8 +10,24 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/fonts": "^0.6.1",
+    "@nuxtjs/i18n": "^8.3.1",
     "nuxt": "^3.11.2",
+    "nuxt-typed-router": "^3.6.3",
+    "pinia": "^2.1.7",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-module": "^4.1.0",
+    "@pinia-orm/nuxt": "^1.7.0",
+    "@pinia/nuxt": "^0.5.1",
+    "@pnpm-monorepo/unocss": "workspace:*",
+    "@unocss/nuxt": "^0.59.4",
+    "@vite-pwa/nuxt": "^0.7.0",
+    "@vue-macros/nuxt": "^1.9.30",
+    "@vueuse/nuxt": "^10.9.0",
+    "eslint": "^9.1.1",
+    "unocss": "0.59.0-beta.1"
   }
 }
