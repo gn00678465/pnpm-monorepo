@@ -1,1 +1,1 @@
-export { default as CubeLoading } from './libs/CubeLoading/index.vue';
+export * from './libs/CubeLoading';

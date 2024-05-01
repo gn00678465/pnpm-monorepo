@@ -27,8 +27,6 @@ function createCommonRequest<ResponseData = any>(
   const _axiosConfig = createAxiosConfig(axiosConfig);
   const instance: AxiosInstance = axios.create(_axiosConfig);
 
-  // const abortControllerMap = new Map<string, AbortController>();
-
   // config axios retry
   const retryOptions = createRetryOptions(opts.retries, _axiosConfig);
   axiosRetry(instance, retryOptions);
@@ -39,11 +37,6 @@ function createCommonRequest<ResponseData = any>(
     // set request id
     const requestId = nanoid();
     config.headers.set(REQUEST_ID_KEY, requestId);
-
-    // config abort
-    // const abortController = new AbortController();
-    // config.signal = abortController.signal;
-    // abortControllerMap.set(requestId, abortController);
 
     // handle config by hook
     const handledConfig = opts.onRequest?.(config) || config;
@@ -61,25 +54,8 @@ function createCommonRequest<ResponseData = any>(
     }
   );
 
-  // function cancelRequest(requestId: string) {
-  //   const abortController = abortControllerMap.get(requestId);
-  //   if (abortController) {
-  //     abortController.abort();
-  //     abortControllerMap.delete(requestId);
-  //   }
-  // }
-
-  // function cancelAllRequest() {
-  //   abortControllerMap.forEach((abortController) => {
-  //     abortController.abort();
-  //   });
-  //   abortControllerMap.clear();
-  // }
-
   return {
     instance
-    // cancelRequest,
-    // cancelAllRequest
   };
 }
 
@@ -96,14 +72,14 @@ export function createRequest<ResponseData = any>(
 ) {
   const { instance } = createCommonRequest<ResponseData>(axiosConfig, options);
 
-  const request = async function request<
-    T = ResponseData,
-    R = AxiosResponse<T>,
-    D = any
-  >(config: AxiosRequestConfig<D>) {
-    const response = await instance<T, R, D>(config);
-    return response;
-  };
+  // const request = async function request<
+  //   T = ResponseData,
+  //   R = AxiosResponse<T>,
+  //   D = any
+  // >(config: AxiosRequestConfig<D>) {
+  //   const response = await instance<T, R, D>(config);
+  //   return response;
+  // };
 
-  return request;
+  return instance;
 }
