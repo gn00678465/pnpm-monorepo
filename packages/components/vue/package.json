@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "prepare": "pnpm run build"
   },
   "dependencies": {
     "vue": "^3.4.21"

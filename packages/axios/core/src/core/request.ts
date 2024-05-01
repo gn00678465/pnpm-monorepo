@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import type {
-  AxiosResponse,
   CreateAxiosDefaults,
   InternalAxiosRequestConfig,
   AxiosError,
-  AxiosRequestConfig,
   AxiosInstance
 } from 'axios';
 import axiosRetry from 'axios-retry';

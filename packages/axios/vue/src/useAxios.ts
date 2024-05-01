@@ -211,7 +211,7 @@ export function useAxios<T = any, R = AxiosResponse<T>, D = any>(
   return { ...result };
 }
 
-export type UseAxiosReturn<T, R, D> = {
+export type UseAxiosReturn<T> = {
   /**
    * Axios Response
    */
@@ -224,7 +224,7 @@ export type UseAxiosReturn<T, R, D> = {
   isCanceled: Ref<boolean>;
 };
 
-export interface StrictUseAxiosReturn<T, R, D> extends UseAxiosReturn<T, R, D> {
+export interface StrictUseAxiosReturn<T, R, D> extends UseAxiosReturn<T> {
   /**
    * Manually call the axios request
    */
@@ -233,7 +233,7 @@ export interface StrictUseAxiosReturn<T, R, D> extends UseAxiosReturn<T, R, D> {
     config?: AxiosRequestConfig<D>
   ) => Promise<StrictUseAxiosReturn<T, R, D>>;
 }
-export interface EasyUseAxiosReturn<T, R, D> extends UseAxiosReturn<T, R, D> {
+export interface EasyUseAxiosReturn<T, R, D> extends UseAxiosReturn<T> {
   /**
    * Manually call the axios request
    */

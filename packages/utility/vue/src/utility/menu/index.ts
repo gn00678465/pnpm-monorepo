@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { RouteRecordRaw } from 'vue-router';
 
 type MenuRecordSingle = Record<string, any>;
 
@@ -9,28 +8,37 @@ type MenuRecordSingleWithChildren = MenuRecordSingle & {
 
 type MenuRecordRaw = MenuRecordSingle | MenuRecordSingleWithChildren;
 
-export interface TransVueRoutesToNMenuOptions<T> {
-  checkPagePermissions?: (route: RouteRecordRaw) => boolean;
-  checkPageHideInMenu?: (route: RouteRecordRaw) => boolean;
-  sortRoutes?: (arg: RouteRecordRaw[]) => RouteRecordRaw[];
-  addPartialProps?: (route: RouteRecordRaw) => T;
+export interface TransVueRoutesToNMenuOptions<
+  RouteType extends { children?: RouteType[] },
+  MenuType
+> {
+  checkPagePermissions?: (route: RouteType) => boolean;
+  checkPageHideInMenu?: (route: RouteType) => boolean;
+  sortRoutes?: (arg: RouteType[]) => RouteType[];
+  addPartialProps?: (route: RouteType) => MenuType;
 }
 
-export function transVueRoutesToMenu<MenuType extends MenuRecordRaw = any>(
-  routes?: RouteRecordRaw[],
-  options: TransVueRoutesToNMenuOptions<MenuType> = {}
+export function transVueRoutesToMenu<
+  RouteType extends { children?: RouteType[] },
+  MenuType extends MenuRecordRaw = any
+>(
+  routes?: RouteType[],
+  options: TransVueRoutesToNMenuOptions<RouteType, MenuType> = {}
 ) {
   const { sortRoutes = (arg) => arg } = options;
 
   if (!routes) return [];
   return sortRoutes(routes).flatMap((route) =>
-    transVueRouteToMenu<MenuType>(route, options)
+    transVueRouteToMenu<RouteType, MenuType>(route, options)
   );
 }
 
-function transVueRouteToMenu<MenuType extends MenuRecordRaw = any>(
-  route: RouteRecordRaw,
-  options: TransVueRoutesToNMenuOptions<MenuType> = {}
+function transVueRouteToMenu<
+  RouteType extends { children?: RouteType[] },
+  MenuType extends MenuRecordRaw = any
+>(
+  route: RouteType,
+  options: TransVueRoutesToNMenuOptions<RouteType, MenuType> = {}
 ) {
   const {
     checkPageHideInMenu = () => false,
@@ -39,13 +47,11 @@ function transVueRouteToMenu<MenuType extends MenuRecordRaw = any>(
     addPartialProps = (arg) => arg
   } = options;
 
-  const routes: (MenuType | RouteRecordRaw)[] = [];
-  const { name, path, children, ...rest } = route;
+  const routes: (MenuType | RouteType)[] = [];
+  const { children = [], ...rest } = route;
   let _route = addPartialProps({
-    name,
-    path,
     ...rest
-  } as RouteRecordRaw);
+  } as RouteType);
 
   /** 處理是否隱藏頁面 */
   if (checkPageHideInMenu(route)) return routes;
