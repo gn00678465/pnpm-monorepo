@@ -18,6 +18,15 @@ export default defineConfig({
     }
   },
 
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        admin: resolve(__dirname, './admin/index.html')
+      }
+    }
+  },
+
   server: {
     host: '0.0.0.0'
   },
