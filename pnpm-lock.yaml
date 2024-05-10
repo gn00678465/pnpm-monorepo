@@ -168,7 +168,7 @@ importers:
         version: link:../../../packages/axios/vue
       '@pnpm-monorepo/vue-components':
         specifier: workspace:*
-        version: link:../../../packages/components/vue
+        version: link:../../../packages/components/vue-components
       '@pnpm-monorepo/vue-utility':
         specifier: workspace:*
         version: link:../../../packages/utility/vue
@@ -280,7 +280,7 @@ importers:
         specifier: ^2.9.3
         version: 2.9.3
 
-  packages/components/vue:
+  packages/components/vue-components:
     dependencies:
       vue:
         specifier: ^3.4.21
@@ -623,11 +623,6 @@ packages:
 
   '@babel/parser@7.24.0':
     resolution: {integrity: sha512-QuP/FxEAzMSjXygs8v4N9dvdXzEHN4W1oF3PxuWAtPo08UdM17u89RDMgjLn/mlc56iM0HlLmVkO/wgR+rDgHg==}
-    engines: {node: '>=6.0.0'}
-    hasBin: true
-
-  '@babel/parser@7.24.1':
-    resolution: {integrity: sha512-Zo9c7N3xdOIQrNip7Lc9wvRPzlRtovHVE4lkz8WEDr7uYh/GMQhSiIgFxGIArRHYdJE5kxtZjAf8rT0xhdLCzg==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -8977,10 +8972,10 @@ snapshots:
       '@babel/helper-compilation-targets': 7.23.6
       '@babel/helper-module-transforms': 7.23.3(@babel/core@7.24.3)
       '@babel/helpers': 7.24.1
-      '@babel/parser': 7.24.1
+      '@babel/parser': 7.24.5
       '@babel/template': 7.24.0
       '@babel/traverse': 7.24.1
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
       convert-source-map: 2.0.0
       debug: 4.3.4
       gensync: 1.0.0-beta.2
@@ -9011,7 +9006,7 @@ snapshots:
 
   '@babel/generator@7.24.1':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
       jsesc: 2.5.2
@@ -9025,7 +9020,7 @@ snapshots:
 
   '@babel/helper-annotate-as-pure@7.22.5':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
 
   '@babel/helper-builder-binary-assignment-operator-visitor@7.22.15':
     dependencies:
@@ -9088,23 +9083,23 @@ snapshots:
   '@babel/helper-function-name@7.23.0':
     dependencies:
       '@babel/template': 7.24.0
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
 
   '@babel/helper-hoist-variables@7.22.5':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
 
   '@babel/helper-member-expression-to-functions@7.23.0':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
 
   '@babel/helper-module-imports@7.22.15':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
 
   '@babel/helper-module-imports@7.24.3':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
 
   '@babel/helper-module-transforms@7.23.3(@babel/core@7.24.3)':
     dependencies:
@@ -9126,7 +9121,7 @@ snapshots:
 
   '@babel/helper-optimise-call-expression@7.22.5':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
 
   '@babel/helper-plugin-utils@7.24.0': {}
 
@@ -9153,7 +9148,7 @@ snapshots:
 
   '@babel/helper-simple-access@7.22.5':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
 
   '@babel/helper-simple-access@7.24.5':
     dependencies:
@@ -9161,11 +9156,11 @@ snapshots:
 
   '@babel/helper-skip-transparent-expression-wrappers@7.22.5':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
 
   '@babel/helper-split-export-declaration@7.22.6':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
 
   '@babel/helper-split-export-declaration@7.24.5':
     dependencies:
@@ -9191,7 +9186,7 @@ snapshots:
     dependencies:
       '@babel/template': 7.24.0
       '@babel/traverse': 7.24.1
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
     transitivePeerDependencies:
       - supports-color
 
@@ -9205,28 +9200,24 @@ snapshots:
 
   '@babel/highlight@7.23.4':
     dependencies:
-      '@babel/helper-validator-identifier': 7.22.20
+      '@babel/helper-validator-identifier': 7.24.5
       chalk: 2.4.2
       js-tokens: 4.0.0
 
   '@babel/highlight@7.24.2':
     dependencies:
-      '@babel/helper-validator-identifier': 7.22.20
+      '@babel/helper-validator-identifier': 7.24.5
       chalk: 2.4.2
       js-tokens: 4.0.0
       picocolors: 1.0.0
 
   '@babel/parser@7.24.0':
     dependencies:
-      '@babel/types': 7.24.0
-
-  '@babel/parser@7.24.1':
-    dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
 
   '@babel/parser@7.24.5':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
 
   '@babel/plugin-bugfix-firefox-class-in-computed-class-key@7.24.4(@babel/core@7.24.5)':
     dependencies:
@@ -9627,7 +9618,7 @@ snapshots:
       '@babel/helper-module-imports': 7.24.3
       '@babel/helper-plugin-utils': 7.24.0
       '@babel/plugin-syntax-jsx': 7.24.1(@babel/core@7.24.3)
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
 
   '@babel/plugin-transform-regenerator@7.24.1(@babel/core@7.24.5)':
     dependencies:
@@ -9819,8 +9810,8 @@ snapshots:
   '@babel/template@7.24.0':
     dependencies:
       '@babel/code-frame': 7.24.2
-      '@babel/parser': 7.24.1
-      '@babel/types': 7.24.0
+      '@babel/parser': 7.24.5
+      '@babel/types': 7.24.5
 
   '@babel/traverse@7.24.1':
     dependencies:
@@ -9830,8 +9821,8 @@ snapshots:
       '@babel/helper-function-name': 7.23.0
       '@babel/helper-hoist-variables': 7.22.5
       '@babel/helper-split-export-declaration': 7.22.6
-      '@babel/parser': 7.24.1
-      '@babel/types': 7.24.0
+      '@babel/parser': 7.24.5
+      '@babel/types': 7.24.5
       debug: 4.3.4
       globals: 11.12.0
     transitivePeerDependencies:
@@ -11376,24 +11367,24 @@ snapshots:
 
   '@types/babel__core@7.20.5':
     dependencies:
-      '@babel/parser': 7.24.1
-      '@babel/types': 7.24.0
+      '@babel/parser': 7.24.5
+      '@babel/types': 7.24.5
       '@types/babel__generator': 7.6.8
       '@types/babel__template': 7.4.4
       '@types/babel__traverse': 7.20.5
 
   '@types/babel__generator@7.6.8':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
 
   '@types/babel__template@7.4.4':
     dependencies:
-      '@babel/parser': 7.24.1
-      '@babel/types': 7.24.0
+      '@babel/parser': 7.24.5
+      '@babel/types': 7.24.5
 
   '@types/babel__traverse@7.20.5':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
 
   '@types/conventional-commits-parser@5.0.0':
     dependencies:
@@ -11953,7 +11944,7 @@ snapshots:
       '@unocss/transformer-directives': 0.59.0-beta.1
       chokidar: 3.6.0
       fast-glob: 3.3.2
-      magic-string: 0.30.8
+      magic-string: 0.30.10
       vite: 5.2.10(@types/node@20.11.30)(terser@5.30.3)
     transitivePeerDependencies:
       - rollup
@@ -11969,7 +11960,7 @@ snapshots:
       '@unocss/transformer-directives': 0.59.0-beta.1
       chokidar: 3.6.0
       fast-glob: 3.3.2
-      magic-string: 0.30.8
+      magic-string: 0.30.10
       vite: 5.2.8(@types/node@20.11.30)(terser@5.30.3)
     transitivePeerDependencies:
       - rollup
@@ -12211,7 +12202,7 @@ snapshots:
 
   '@vue-macros/api@0.9.4(rollup@4.16.0)(vue@3.4.21(typescript@5.4.3))':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
       '@vue-macros/common': 1.10.2(rollup@4.16.0)(vue@3.4.21(typescript@5.4.3))
       resolve.exports: 2.0.2
     transitivePeerDependencies:
@@ -12279,7 +12270,7 @@ snapshots:
 
   '@vue-macros/common@1.10.2(rollup@4.16.0)(vue@3.4.21(typescript@5.4.3))':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
       '@rollup/pluginutils': 5.1.0(rollup@4.16.0)
       '@vue/compiler-sfc': 3.4.21
       ast-kit: 0.12.1
@@ -12292,7 +12283,7 @@ snapshots:
 
   '@vue-macros/common@1.10.2(rollup@4.16.0)(vue@3.4.21(typescript@5.4.5))':
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
       '@rollup/pluginutils': 5.1.0(rollup@4.16.0)
       '@vue/compiler-sfc': 3.4.21
       ast-kit: 0.12.1
@@ -12568,11 +12559,11 @@ snapshots:
 
   '@vue-macros/reactivity-transform@0.4.4(rollup@4.16.0)(vue@3.4.21(typescript@5.4.3))':
     dependencies:
-      '@babel/parser': 7.24.1
+      '@babel/parser': 7.24.5
       '@vue-macros/common': 1.10.2(rollup@4.16.0)(vue@3.4.21(typescript@5.4.3))
       '@vue/compiler-core': 3.4.21
       '@vue/shared': 3.4.21
-      magic-string: 0.30.8
+      magic-string: 0.30.10
       unplugin: 1.10.1
       vue: 3.4.21(typescript@5.4.3)
     transitivePeerDependencies:
@@ -12580,11 +12571,11 @@ snapshots:
 
   '@vue-macros/reactivity-transform@0.4.4(rollup@4.16.0)(vue@3.4.21(typescript@5.4.5))':
     dependencies:
-      '@babel/parser': 7.24.1
+      '@babel/parser': 7.24.5
       '@vue-macros/common': 1.10.2(rollup@4.16.0)(vue@3.4.21(typescript@5.4.5))
       '@vue/compiler-core': 3.4.21
       '@vue/shared': 3.4.21
-      magic-string: 0.30.8
+      magic-string: 0.30.10
       unplugin: 1.10.1
       vue: 3.4.21(typescript@5.4.5)
     transitivePeerDependencies:
@@ -12714,7 +12705,7 @@ snapshots:
       '@babel/plugin-syntax-jsx': 7.24.1(@babel/core@7.24.3)
       '@babel/template': 7.24.0
       '@babel/traverse': 7.24.1
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
       '@vue/babel-helper-vue-transform-on': 1.2.2
       '@vue/babel-plugin-resolve-type': 1.2.2(@babel/core@7.24.3)
       camelcase: 6.3.0
@@ -12731,12 +12722,12 @@ snapshots:
       '@babel/core': 7.24.3
       '@babel/helper-module-imports': 7.22.15
       '@babel/helper-plugin-utils': 7.24.0
-      '@babel/parser': 7.24.1
+      '@babel/parser': 7.24.5
       '@vue/compiler-sfc': 3.4.21
 
   '@vue/compiler-core@3.4.21':
     dependencies:
-      '@babel/parser': 7.24.1
+      '@babel/parser': 7.24.5
       '@vue/shared': 3.4.21
       entities: 4.5.0
       estree-walker: 2.0.2
@@ -12749,7 +12740,7 @@ snapshots:
 
   '@vue/compiler-sfc@3.4.21':
     dependencies:
-      '@babel/parser': 7.24.1
+      '@babel/parser': 7.24.5
       '@vue/compiler-core': 3.4.21
       '@vue/compiler-dom': 3.4.21
       '@vue/compiler-ssr': 3.4.21
@@ -13287,12 +13278,12 @@ snapshots:
 
   ast-kit@0.12.1:
     dependencies:
-      '@babel/parser': 7.24.1
+      '@babel/parser': 7.24.5
       pathe: 1.1.2
 
   ast-kit@0.9.5(rollup@4.16.0):
     dependencies:
-      '@babel/parser': 7.24.1
+      '@babel/parser': 7.24.5
       '@rollup/pluginutils': 5.1.0(rollup@4.16.0)
       pathe: 1.1.2
     transitivePeerDependencies:
@@ -13300,14 +13291,14 @@ snapshots:
 
   ast-walker-scope@0.5.0(rollup@4.16.0):
     dependencies:
-      '@babel/parser': 7.24.1
+      '@babel/parser': 7.24.5
       ast-kit: 0.9.5(rollup@4.16.0)
     transitivePeerDependencies:
       - rollup
 
   ast-walker-scope@0.6.1:
     dependencies:
-      '@babel/parser': 7.24.1
+      '@babel/parser': 7.24.5
       ast-kit: 0.12.1
 
   astring@1.8.6: {}
@@ -16100,7 +16091,7 @@ snapshots:
   magicast@0.3.4:
     dependencies:
       '@babel/parser': 7.24.5
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
       source-map-js: 1.2.0
 
   make-dir@3.1.0:
@@ -19291,7 +19282,7 @@ snapshots:
 
   unplugin-vue-router@0.7.0(rollup@4.16.0)(vue-router@4.3.0(vue@3.4.21(typescript@5.4.5)))(vue@3.4.21(typescript@5.4.5)):
     dependencies:
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
       '@rollup/pluginutils': 5.1.0(rollup@4.16.0)
       '@vue-macros/common': 1.10.2(rollup@4.16.0)(vue@3.4.21(typescript@5.4.5))
       ast-walker-scope: 0.5.0(rollup@4.16.0)
@@ -19365,7 +19356,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.24.3
       '@babel/standalone': 7.24.5
-      '@babel/types': 7.24.0
+      '@babel/types': 7.24.5
       defu: 6.1.4
       jiti: 1.21.0
       mri: 1.2.0
@@ -19627,7 +19618,7 @@ snapshots:
       '@vue/babel-plugin-jsx': 1.2.2(@babel/core@7.24.3)
       '@vue/compiler-dom': 3.4.21
       kolorist: 1.8.0
-      magic-string: 0.30.8
+      magic-string: 0.30.10
       vite: 5.2.10(@types/node@20.11.30)(terser@5.30.3)
     transitivePeerDependencies:
       - supports-color
@@ -19642,7 +19633,7 @@ snapshots:
       '@vue/babel-plugin-jsx': 1.2.2(@babel/core@7.24.3)
       '@vue/compiler-dom': 3.4.21
       kolorist: 1.8.0
-      magic-string: 0.30.8
+      magic-string: 0.30.10
       vite: 5.2.8(@types/node@20.11.30)(terser@5.30.3)
     transitivePeerDependencies:
       - supports-color
