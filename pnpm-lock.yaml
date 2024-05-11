@@ -168,7 +168,7 @@ importers:
         version: link:../../../packages/axios/vue
       '@pnpm-monorepo/vue-components':
         specifier: workspace:*
-        version: link:../../../packages/components/vue-components
+        version: link:../../../packages/vue-components
       '@pnpm-monorepo/vue-utility':
         specifier: workspace:*
         version: link:../../../packages/utility/vue
@@ -280,28 +280,6 @@ importers:
         specifier: ^2.9.3
         version: 2.9.3
 
-  packages/components/vue-components:
-    dependencies:
-      vue:
-        specifier: ^3.4.21
-        version: 3.4.21(typescript@5.4.5)
-    devDependencies:
-      '@vitejs/plugin-vue':
-        specifier: ^5.0.4
-        version: 5.0.4(vite@5.2.10(@types/node@20.11.30)(terser@5.30.3))(vue@3.4.21(typescript@5.4.5))
-      typescript:
-        specifier: ^5.2.2
-        version: 5.4.5
-      vite:
-        specifier: ^5.2.0
-        version: 5.2.10(@types/node@20.11.30)(terser@5.30.3)
-      vite-plugin-dts:
-        specifier: ^3.7.3
-        version: 3.7.3(@types/node@20.11.30)(rollup@4.16.0)(typescript@5.4.5)(vite@5.2.10(@types/node@20.11.30)(terser@5.30.3))
-      vue-tsc:
-        specifier: ^2.0.6
-        version: 2.0.7(typescript@5.4.5)
-
   packages/configs/unocss:
     devDependencies:
       unocss:
@@ -365,6 +343,28 @@ importers:
       vue-tsc:
         specifier: ^2.0.6
         version: 2.0.7(typescript@5.4.3)
+
+  packages/vue-components:
+    dependencies:
+      vue:
+        specifier: ^3.4.21
+        version: 3.4.21(typescript@5.4.5)
+    devDependencies:
+      '@vitejs/plugin-vue':
+        specifier: ^5.0.4
+        version: 5.0.4(vite@5.2.10(@types/node@20.11.30)(terser@5.30.3))(vue@3.4.21(typescript@5.4.5))
+      typescript:
+        specifier: ^5.2.2
+        version: 5.4.5
+      vite:
+        specifier: ^5.2.0
+        version: 5.2.10(@types/node@20.11.30)(terser@5.30.3)
+      vite-plugin-dts:
+        specifier: ^3.7.3
+        version: 3.7.3(@types/node@20.11.30)(rollup@4.16.0)(typescript@5.4.5)(vite@5.2.10(@types/node@20.11.30)(terser@5.30.3))
+      vue-tsc:
+        specifier: ^2.0.6
+        version: 2.0.7(typescript@5.4.5)
 
 packages:
 

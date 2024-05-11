@@ -1,12 +1,11 @@
-import { ref, toValue, onScopeDispose, effectScope } from "vue";
-import type { MaybeRef } from "vue";
+import { ref, toValue, onScopeDispose, effectScope } from 'vue';
+import type { MaybeRef } from 'vue';
 
 interface UseEditControllerOptions {
   initialValue: MaybeRef<string>;
 }
 
 export function useEditController(options: UseEditControllerOptions) {
-  const scope = effectScope();
   const _value = ref(options.initialValue);
   const _isEdit = ref(false);
 
@@ -24,11 +23,6 @@ export function useEditController(options: UseEditControllerOptions) {
     _isEdit.value = false;
     _value.value = toValue(options.initialValue);
   }
-
-  /** On scope dispose */
-  onScopeDispose(() => {
-    scope.stop();
-  });
 
   return {
     value: _value,

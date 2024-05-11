@@ -1,15 +1,20 @@
 import { ref, effectScope, watch, onScopeDispose } from 'vue';
 import type { Ref } from 'vue';
 
-interface UseModalControllerOptions {
-  modalValue?: 'show' | (object & string);
+export interface UseModalControllerOptions<T> {
   delay?: number;
 }
 
+export interface UseModalControllerReturn<T> {
+  show: Ref<boolean>;
+  onModalOpen: (values?: T | null) => void;
+  onModalClose: (delayTime?: number) => void;
+  data: Ref<T | null>;
+}
+
 export function useModalController<T extends object>({
-  modalValue = 'show',
   delay = 0
-}: UseModalControllerOptions = {}) {
+}: UseModalControllerOptions<T> = {}): UseModalControllerReturn<T> {
   const scope = effectScope();
 
   const visible = ref(false);
@@ -20,17 +25,19 @@ export function useModalController<T extends object>({
     data.value = values;
     visible.value = true;
   }
-  function onModalClose(delayTime = 0) {
+  function onModalClose(delayTime?: number) {
     _delay.value = handleDelay(delay, delayTime);
     visible.value = false;
   }
 
-  function handleDelay(delay: number, delayTime: number) {
+  function handleDelay(delay: number, delayTime?: number) {
     return delay === 0 && delayTime === 0
       ? 0
       : delay !== 0 && delayTime === 0
         ? delay
-        : delayTime;
+        : delayTime
+          ? delayTime
+          : delay;
   }
 
   scope.run(() => {
@@ -44,11 +51,12 @@ export function useModalController<T extends object>({
   });
 
   onScopeDispose(() => {
+    scope.stop();
     onModalClose();
   });
 
   return {
-    [modalValue]: visible,
+    show: visible,
     onModalOpen,
     onModalClose,
     data
