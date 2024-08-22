@@ -7,13 +7,24 @@ pre-commit:
   parallel: true
   commands:
     vue:fix:
-      glob: 'apps/template-vue/**/*.{js,ts,cjs,mjs,jsx,tsx,vue}'
+      root: apps/template-vue3
+      glob: "*.{js,ts,cjs,mjs,jsx,tsx,vue}"
       exclude:
         - dist/*
         - node_modules/*
         - tests/*
         - public/
-      run: pnpm --filter @pnpm-monorepo/template-vue --fix {staged_files}
+      run: pnpm lint:fix {staged_files}
+      stage_fixed: true
+    nuxt:fix:
+      root: apps/template-nuxt3
+      glob: "*.{js,ts,cjs,mjs,jsx,tsx,vue}"
+      exclude:
+        - dist/*
+        - node_modules/*
+        - tests/*
+        - public/
+      run: pnpm lint:fix {staged_files}
       stage_fixed: true
 commit-msg:
   parallel: true
