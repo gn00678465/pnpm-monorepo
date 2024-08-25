@@ -23,9 +23,13 @@
     "@stylistic/eslint-plugin": "^2.6.4",
     "@types/node": "^22.1.0",
     "@unocss/eslint-plugin": "^0.62.2",
+    "dotenv": "^16.4.5",
     "eslint": "9.5.0",
     "lefthook": "^1.7.11",
+    "taze": "^0.16.6",
+    "tsx": "^4.17.0",
     "typescript": "^5.5.4",
-    "typescript-eslint": "^8.2.0"
+    "typescript-eslint": "^8.2.0",
+    "vite-plugin-dts": "^4.0.3"
   }
 }

@@ -11,6 +11,8 @@ export default antfu(
     unocss: true,
     typescript: true,
     formatters: true,
+    jsonc: false,
+    name: 'template-vue3',
   },
   {
     files: ['**/*.{js,mjs,cjs,ts}'],
@@ -22,7 +24,6 @@ export default antfu(
       'vue': pluginVue,
     },
     rules: {
-      'no-unused-vars': 'warn',
       '@stylistic/indent': ['error', 2],
       '@stylistic/semi': ['error', 'never'],
       '@stylistic/space-before-function-paren': ['error', 'always'],
@@ -43,4 +44,6 @@ export default antfu(
   {
     ignores: ['**/dist', '**/node_modules'],
   },
-)
+).renamePlugins({
+  stylistic: '@stylistic',
+})

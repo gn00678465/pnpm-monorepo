@@ -26,6 +26,11 @@ pre-commit:
         - public/
       run: pnpm lint:fix {staged_files}
       stage_fixed: true
+    package:scripts:fix:
+      root: packages/scripts
+      glob: "*.{js,ts,cjs,mjs,jsx,tsx}"
+      run: pnpm lint:fix {staged_files}
+      stage_fixed: true
 commit-msg:
   parallel: true
   # commands:

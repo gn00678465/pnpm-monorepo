@@ -3,7 +3,13 @@ import eslintConfigBase from './eslint.config.base.mjs'
 
 const baseConfig = antfu({
   typescript: {
-    tsconfigPath: './tsconfig.base.json',
+    parserOptions: {
+      tsconfigRootDir: import.meta.dirname,
+      project: ['./tsconfig.base.json', './apps/*/tsconfig.json', './packages/*/tsconfig.json'],
+      projectService: {
+        allowDefaultProject: ['vite.config.ts'],
+      },
+    },
   },
 }, ...eslintConfigBase)
 

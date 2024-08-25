@@ -10,7 +10,14 @@ export default [
   {
     rules: {
       ...tseslint.configs.recommended[0].rules,
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
+      'n/prefer-global/buffer': ['error', 'always'],
+      'n/prefer-global/console': ['error', 'always'],
+      'n/prefer-global/process': ['error', 'always'],
+      'n/prefer-global/url-search-params': ['error', 'always'],
+      'n/prefer-global/url': ['error', 'always'],
     },
   },
 ]

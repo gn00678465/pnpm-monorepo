@@ -1,0 +1,27 @@
+{
+  "name": "@pnpm-monorepo/scripts",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./src/*"
+      ]
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "only-build": "vite build",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
+  "devDependencies": {
+    "google-sheet-languages-model": "^0.1.5",
+    "googleapis": "^139.0.0"
+  }
+}

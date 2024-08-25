@@ -9,13 +9,16 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "locale:pull": "tsx ./scripts/locale/pull.ts",
+    "locale:push": "tsx ./scripts/locale/push.ts"
   },
   "dependencies": {
     "nuxt": "^3.12.4",
     "vue": "latest"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^0.5.1"
+    "@nuxt/eslint-config": "^0.5.1",
+    "@pnpm-monorepo/scripts": "workspace:*"
   }
 }

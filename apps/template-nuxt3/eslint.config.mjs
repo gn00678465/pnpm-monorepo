@@ -12,6 +12,8 @@ export default createConfigForNuxt(antfu(
     unocss: true,
     typescript: true,
     formatters: true,
+    jsonc: false,
+    name: 'template-nuxt3',
   },
   {
     files: ['**/*.{js,mjs,cjs,ts}'],
@@ -44,4 +46,6 @@ export default createConfigForNuxt(antfu(
   {
     ignores: ['**/dist', '**/node_modules'],
   },
-))
+)).renamePlugins({
+  stylistic: '@stylistic',
+})
