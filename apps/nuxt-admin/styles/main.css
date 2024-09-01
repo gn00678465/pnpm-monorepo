@@ -6,6 +6,12 @@ body,
   padding: 0;
 }
 
+html {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
 html.dark {
   background: #121212;
   color-scheme: dark;

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { NButton } from 'naive-ui';
+
 definePageMeta({
   layout: 'default',
   name: 'AuthLogin',
@@ -8,8 +10,12 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="text-96">
-    login
+  <div>
+    <p class="header-6 text-32">login</p>
+    <br>
+    <NButton>NButton</NButton>
+    <NButton>NButton</NButton>
+    <NButton>NButton</NButton>
   </div>
 </template>
 

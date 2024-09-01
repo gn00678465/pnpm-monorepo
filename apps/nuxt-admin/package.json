@@ -29,6 +29,8 @@
     "@pnpm-monorepo/uno-preset": "workspace:*",
     "@unocss/nuxt": "^0.62.3",
     "@vueuse/nuxt": "^11.0.3",
+    "naive-ui": "^2.39.0",
+    "nuxtjs-naive-ui": "^1.0.2",
     "unplugin-icons": "^0.19.2"
   }
 }
