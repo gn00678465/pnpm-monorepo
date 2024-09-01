@@ -1,0 +1,27 @@
+{
+  "name": "@pnpm-monorepo/color",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "main": "index.js",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./src/*"
+      ]
+    }
+  },
+  "dependencies": {
+    "@ant-design/colors": "^7.1.0",
+    "colord": "^2.9.3"
+  }
+}

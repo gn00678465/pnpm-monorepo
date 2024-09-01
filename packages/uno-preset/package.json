@@ -1,0 +1,24 @@
+{
+  "name": "@pnpm-monorepo/uno-preset",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "main": "index.js",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./src/*"
+      ]
+    }
+  },
+  "devDependencies": {}
+}
