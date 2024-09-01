@@ -1,40 +1,18 @@
 // @unocss-include
-import {
-  presetAttributify,
-  presetIcons,
-  presetTypography,
-  presetUno,
-  presetWebFonts,
-  transformerDirectives,
-  transformerVariantGroup,
-} from 'unocss'
-import type { UserConfig } from 'unocss'
+import { definePreset, transformerDirectives, transformerVariantGroup } from 'unocss'
+import type { Theme } from '@unocss/preset-uno'
 
-export const presetConfig: UserConfig = {
-  content: {
-    pipeline: {
-      exclude: ['node_modules', '.git', 'dist', '.nx'],
-    },
-  },
-  presets: [
-    presetUno({ dark: 'class' }),
-    presetAttributify(),
-    presetIcons({
-      scale: 1.2,
-      warn: true,
-    }),
-    presetTypography(),
-    presetWebFonts({
-      provider: 'google',
-      fonts: {
-        sans: ['Noto Sans TC', 'Roboto'],
-        mono: ['Fira Code', 'Fira Mono:400,700'],
+export const monorepoPreset = definePreset<Theme>(() => {
+  return {
+    name: 'monorepo-preset',
+    content: {
+      pipeline: {
+        exclude: ['node_modules', '.git', 'dist', '.nx'],
       },
-    }),
-  ],
-  transformers: [transformerDirectives(), transformerVariantGroup()],
-  shortcuts: [
-    {
+    },
+    transformers: [transformerDirectives(), transformerVariantGroup()],
+    shortcuts: {
+      //
       'flex-center': 'flex justify-center items-center',
       'flex-x-center': 'flex justify-center',
       'flex-y-center': 'flex items-center',
@@ -48,8 +26,7 @@ export const presetConfig: UserConfig = {
       'i-flex-col-center': 'flex-col i-flex-center',
       'i-flex-col-stretch': 'i-flex-col items-stretch',
       'flex-1-hidden': 'flex-1 overflow-hidden',
-    },
-    {
+      //
       'absolute-lt': 'absolute left-0 top-0',
       'absolute-lb': 'absolute left-0 bottom-0',
       'absolute-rt': 'absolute right-0 top-0',
@@ -68,14 +45,14 @@ export const presetConfig: UserConfig = {
       'fixed-bl': 'fixed-lb',
       'fixed-br': 'fixed-rb',
       'fixed-center': 'fixed-lt flex-center size-full',
-    },
-    {
+      //
       'nowrap-hidden': 'overflow-hidden whitespace-nowrap',
       'ellipsis-text': 'nowrap-hidden text-ellipsis',
     },
-  ],
-  rules: [
-    [/^m-(\d+)$/, ([, d]) => ({ margin: `${Number.parseInt(d) / 4}rem` })],
-    [/^p-(\d+)$/, match => ({ padding: `${Number.parseInt(match[1]) / 4}rem` })],
-  ],
-}
+    rules: [
+      [/^m-(\d+)$/, ([, d]) => ({ margin: `${Number.parseInt(d) / 4}rem` })],
+      [/^p-(\d+)$/, match => ({ padding: `${Number.parseInt(match[1]) / 4}rem` })],
+      [/^header-[1-6]$/, () => ({ 'font-weight': 700, 'letter-spacing': '0.05em', 'line-height': 1.2 })],
+    ],
+  }
+})
