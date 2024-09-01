@@ -12,7 +12,11 @@
     "rootDir": ".",
     "module": "ESNext",
     "moduleResolution": "node",
-    "paths": {},
+    "paths": {
+      "@pnpm-monorepo/layouts": [
+        "packages/layouts/src/index.ts"
+      ]
+    },
     "declaration": false,
     "importHelpers": true,
     "sourceMap": true,

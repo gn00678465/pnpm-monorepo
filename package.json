@@ -12,7 +12,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "docker:template": "docker compose -f docker/template-vue/compose.yaml",
-    "template:vue": "pnpm --filter @pnpm-monorepo/template-vue"
+    "vue:admin": "pnpm --filter @pnpm-monorepo/vue-admin",
+    "nuxt:admin": "pnpm --filter @pnpm-monorepo/nuxt-admin"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.26.0",

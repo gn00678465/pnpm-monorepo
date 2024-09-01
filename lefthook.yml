@@ -6,30 +6,29 @@
 pre-commit:
   parallel: true
   commands:
-    vue:fix:
-      root: apps/template-vue3
+    echo:
+      run: echo {staged_files}
+    echoQuotes:
+      run: echo '{staged_files}'
+    vue-admin:fix:
+      root: apps/vue-admin/
       glob: "*.{js,ts,cjs,mjs,jsx,tsx,vue}"
       exclude:
         - dist/*
         - node_modules/*
         - tests/*
         - public/
-      run: pnpm lint:fix {staged_files}
+      run: pnpm --filter @pnpm-monorepo/vue-admin --fix {staged_files}
       stage_fixed: true
-    nuxt:fix:
-      root: apps/template-nuxt3
+    nuxt-admin:fix:
+      root: apps/nuxt-admin/
       glob: "*.{js,ts,cjs,mjs,jsx,tsx,vue}"
       exclude:
         - dist/*
         - node_modules/*
         - tests/*
         - public/
-      run: pnpm lint:fix {staged_files}
-      stage_fixed: true
-    package:scripts:fix:
-      root: packages/scripts
-      glob: "*.{js,ts,cjs,mjs,jsx,tsx}"
-      run: pnpm lint:fix {staged_files}
+      run: pnpm --filter @pnpm-monorepo/nuxt-admin --fix {staged_files}
       stage_fixed: true
 commit-msg:
   parallel: true

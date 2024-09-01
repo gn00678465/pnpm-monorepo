@@ -1,0 +1,39 @@
+{
+  "name": "@pnpm-monorepo/vue-admin",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "locale:pull": "tsx ./scripts/locale/pull.ts",
+    "locale:push": "tsx ./scripts/locale/push.ts"
+  },
+  "dependencies": {
+    "@unocss/reset": "^0.62.2",
+    "pinia": "^2.2.2",
+    "pinia-orm": "^1.9.2",
+    "vue": "^3.4.35",
+    "vue-router": "^4.4.3",
+    "@pnpm-monorepo/layouts": "workspace:*",
+    "@pnpm-monorepo/web-components": "workspace:*"
+  },
+  "devDependencies": {
+    "@iconify/json": "^2.2.235",
+    "@pnpm-monorepo/scripts": "workspace:*",
+    "@vitejs/plugin-vue": "^5.1.2",
+    "eslint-plugin-vue": "^9.27.0",
+    "typescript": "^5.5.4",
+    "unocss": "^0.62.2",
+    "unplugin-icons": "^0.19.2",
+    "unplugin-vue-router": "^0.10.2",
+    "vite": "^5.4.0",
+    "vite-plugin-vue-devtools": "^7.3.7",
+    "vite-plugin-vue-layouts": "^0.11.0",
+    "vue-eslint-parser": "^9.4.3",
+    "vue-tsc": "^2.0.29"
+  }
+}
