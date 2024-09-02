@@ -19,6 +19,9 @@ export default defineNuxtConfig({
     '@unocss/reset/tailwind.css',
     '~/styles/main.css',
   ],
+  unocss: {
+    nuxtLayers: true,
+  },
   devServer: {
     host: '0.0.0.0',
     port: 3000,

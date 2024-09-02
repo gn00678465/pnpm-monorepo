@@ -1,4 +1,5 @@
 {
+  "emmet.triggerExpansionOnTab": true,
   "cSpell.words": [
     "antfu",
     "colord",
