@@ -20,5 +20,8 @@
       ]
     }
   },
-  "devDependencies": {}
+  "dependencies": {
+    "@pnpm-monorepo/color": "workspace:*",
+    "@pnpm-monorepo/utility": "workspace:*"
+  }
 }

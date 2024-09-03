@@ -1,36 +1,43 @@
 interface GetCssVarsOptions {
   keyHandler?: (...color: string[]) => string
-  colorHandler?: (color: string) => string
+  valueHandler?: (color: string) => string
 }
 
-function getCssVars(
-  theme: Record<string, Record<string, string>>,
-  { keyHandler, colorHandler }: GetCssVarsOptions = {},
+function getCssVars<ThemeKey extends string = string>(
+  theme: Record<ThemeKey, Record<string, string>>,
+  { keyHandler, valueHandler }: GetCssVarsOptions = {},
 ): string {
   keyHandler = (...keys: string[]) => {
     return `--${keys.join('-')}`
   }
-  colorHandler = v => v
+  valueHandler = v => v
 
   const styles: string[] = []
 
   for (const key in theme) {
     if (typeof theme[key] === 'object') {
       for (const num in theme[key]) {
-        styles.push(`${keyHandler(key, num)}: ${colorHandler(theme[key][num])}`)
+        styles.push(`${keyHandler(key, num)}: ${valueHandler(theme[key][num])}`)
       }
+    }
+    if (typeof theme[key] === 'string') {
+      styles.push(`${keyHandler(key)}: ${valueHandler(theme[key])}`)
     }
   }
 
-  return styles.join(';')
+  return styles.filter(Boolean).join(';')
 }
 
 /**
- *
+ * 將 css 變數綁訂到 document style 上
  * @param theme
+ * @param options
  */
-export function addCssVarsToGlobal(theme: Record<string, Record<string, string>>): void {
-  const cssVarStr = getCssVars(theme)
+export function addCssVarsToGlobal<ThemeKey extends string = string>(
+  theme: Record<ThemeKey, Record<string, string>>,
+  options: GetCssVarsOptions = {},
+): void {
+  const cssVarStr = getCssVars(theme, options)
   const css = `
     :root {
       ${cssVarStr}
