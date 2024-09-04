@@ -18,6 +18,9 @@
       ],
       "@pnpm-monorepo/naive-ui-extension": [
         "packages/naive-ui-extension/src/index.ts"
+      ],
+      "@pnpm-monorepo/color": [
+        "packages/color/src/index.ts"
       ]
     },
     "declaration": false,

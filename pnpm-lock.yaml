@@ -59,6 +59,9 @@ importers:
 
   apps/nuxt-admin:
     dependencies:
+      '@pnpm-monorepo/color':
+        specifier: workspace:*
+        version: link:../../packages/color
       '@pnpm-monorepo/layouts':
         specifier: workspace:*
         version: link:../../packages/layouts
@@ -6182,7 +6185,7 @@ snapshots:
       '@clack/prompts': 0.7.0
       '@eslint-community/eslint-plugin-eslint-comments': 4.4.0(eslint@9.5.0)
       '@stylistic/eslint-plugin': 2.6.4(eslint@9.5.0)(typescript@5.5.4)
-      '@typescript-eslint/eslint-plugin': 8.1.0(@typescript-eslint/parser@8.2.0(eslint@9.5.0)(typescript@5.5.4))(eslint@9.5.0)(typescript@5.5.4)
+      '@typescript-eslint/eslint-plugin': 8.1.0(@typescript-eslint/parser@8.1.0(eslint@9.5.0)(typescript@5.5.4))(eslint@9.5.0)(typescript@5.5.4)
       '@typescript-eslint/parser': 8.1.0(eslint@9.5.0)(typescript@5.5.4)
       '@vitest/eslint-plugin': 1.0.3(@typescript-eslint/utils@8.2.0(eslint@9.5.0)(typescript@5.5.4))(eslint@9.5.0)(typescript@5.5.4)
       eslint: 9.5.0
@@ -7841,10 +7844,10 @@ snapshots:
 
   '@types/web-bluetooth@0.0.20': {}
 
-  '@typescript-eslint/eslint-plugin@8.1.0(@typescript-eslint/parser@8.2.0(eslint@9.5.0)(typescript@5.5.4))(eslint@9.5.0)(typescript@5.5.4)':
+  '@typescript-eslint/eslint-plugin@8.1.0(@typescript-eslint/parser@8.1.0(eslint@9.5.0)(typescript@5.5.4))(eslint@9.5.0)(typescript@5.5.4)':
     dependencies:
       '@eslint-community/regexpp': 4.11.0
-      '@typescript-eslint/parser': 8.2.0(eslint@9.5.0)(typescript@5.5.4)
+      '@typescript-eslint/parser': 8.1.0(eslint@9.5.0)(typescript@5.5.4)
       '@typescript-eslint/scope-manager': 8.1.0
       '@typescript-eslint/type-utils': 8.1.0(eslint@9.5.0)(typescript@5.5.4)
       '@typescript-eslint/utils': 8.1.0(eslint@9.5.0)(typescript@5.5.4)
@@ -9828,7 +9831,7 @@ snapshots:
     dependencies:
       eslint: 9.5.0
     optionalDependencies:
-      '@typescript-eslint/eslint-plugin': 8.1.0(@typescript-eslint/parser@8.2.0(eslint@9.5.0)(typescript@5.5.4))(eslint@9.5.0)(typescript@5.5.4)
+      '@typescript-eslint/eslint-plugin': 8.1.0(@typescript-eslint/parser@8.1.0(eslint@9.5.0)(typescript@5.5.4))(eslint@9.5.0)(typescript@5.5.4)
 
   eslint-plugin-vue@9.27.0(eslint@9.5.0):
     dependencies:

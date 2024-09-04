@@ -15,10 +15,17 @@ export default createConfigForNuxt(antfu(
     jsonc: false,
     name: 'nuxt-admin',
   },
+  ...eslintConfigBase,
+  // Vue 推薦設定
+  ...pluginVue.configs['flat/essential'],
+  // 對 Vue 文件使用特定的解析器
   {
-    files: ['**/*.{js,mjs,cjs,ts}'],
+    files: ['**/*.{js,mjs,cjs,ts,vue}'],
     languageOptions: {
       globals: globals.browser,
+      parserOptions: {
+        parser: tseslint.parser,
+      },
     },
     plugins: {
       '@stylistic': stylistic,
@@ -31,21 +38,11 @@ export default createConfigForNuxt(antfu(
       '@stylistic/space-before-function-paren': ['error', 'always'],
     },
   },
-  ...eslintConfigBase,
-  // Vue 推薦設定
-  ...pluginVue.configs['flat/essential'],
-  // 對 Vue 文件使用特定的解析器
-  {
-    files: ['**/*.vue'],
-    languageOptions: {
-      parserOptions: {
-        parser: tseslint.parser,
-      },
-    },
-  },
   {
     ignores: ['**/dist', '**/node_modules'],
   },
 )).renamePlugins({
   stylistic: '@stylistic',
+}).overrideRules({
+  "vue/first-attribute-linebreak": 'off',
 })
