@@ -67,8 +67,9 @@ function getContrastingColor(background: string): string {
           :style="{ backgroundColor: colors[primaryName], color: getContrastingColor(colors[primaryName]) }">
           <p class="color-palette__header-title">{{ title }}</p>
           <p class="color-palette__header-value">
-            <span class="color-palette__header-value-name">{{ renderHeaderName ? renderHeaderName(primaryName) :
-      primaryName }}</span>
+            <span class="color-palette__header-value-name">
+              {{ renderHeaderName ? renderHeaderName(primaryName) : primaryName }}
+            </span>
             <span class="color-palette__header-value-color">{{ colors[primaryName]?.toUpperCase() }}</span>
           </p>
         </li>
@@ -91,7 +92,7 @@ function getContrastingColor(background: string): string {
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 xl:grid-cols-3 2xl:grid-cols-5">
       <NCard v-for="(val, key) of unocssTheme" :key="key" :theme-overrides="{ borderRadius: '1rem' }">
         <UseColorPaletteTemplate :title="key" primary-name="6" :show-primary="true" :colors="val"
-          :render-header-name="(n) => `${key}-${n}`" :render-item-name="(n) => `${key}-${n}`" />
+          :render-header-name="(n) => `${key}`" :render-item-name="(n) => n === '6' ? `${key}` : `${key}-${n}`" />
       </NCard>
     </div>
   </div>

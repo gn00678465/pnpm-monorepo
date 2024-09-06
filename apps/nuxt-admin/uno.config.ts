@@ -6,6 +6,7 @@ import {
   presetWebFonts,
 } from 'unocss'
 import { monorepoPreset } from '@pnpm-monorepo/uno-preset'
+import { themeVars } from './theme/vars';
 
 export default defineConfig({
   presets: [
@@ -19,6 +20,10 @@ export default defineConfig({
         mono: ['Fira Code', 'Fira Mono:400,700'],
       },
     }),
-    monorepoPreset()
+    monorepoPreset({
+      theme: {
+        ...themeVars,
+      }
+    })
   ],
 })

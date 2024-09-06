@@ -1,8 +1,10 @@
 // @unocss-include
 import { definePreset, transformerDirectives, transformerVariantGroup } from 'unocss'
-import type { Theme } from '@unocss/preset-uno'
+import type { MonorepoPresetOptions } from './types'
 
-export const monorepoPreset = definePreset<Theme>(() => {
+export const monorepoPreset = definePreset((options: MonorepoPresetOptions = {}) => {
+  const { theme = {} } = options
+
   return {
     name: 'monorepo-preset',
     content: {
@@ -11,8 +13,14 @@ export const monorepoPreset = definePreset<Theme>(() => {
       },
     },
     transformers: [transformerDirectives(), transformerVariantGroup()],
+    theme,
     shortcuts: {
-      //
+      // size
+      'size-0': 'w-0 h-0',
+      'size-full': 'w-full h-full',
+      'size-screen': 'w-screen h-screen',
+      'size-1/2': 'w-1/2 h-1/2',
+      // flex layout
       'flex-center': 'flex justify-center items-center',
       'flex-x-center': 'flex justify-center',
       'flex-y-center': 'flex items-center',
@@ -26,7 +34,7 @@ export const monorepoPreset = definePreset<Theme>(() => {
       'i-flex-col-center': 'flex-col i-flex-center',
       'i-flex-col-stretch': 'i-flex-col items-stretch',
       'flex-1-hidden': 'flex-1 overflow-hidden',
-      //
+      // position layout
       'absolute-lt': 'absolute left-0 top-0',
       'absolute-lb': 'absolute left-0 bottom-0',
       'absolute-rt': 'absolute right-0 top-0',
@@ -35,6 +43,8 @@ export const monorepoPreset = definePreset<Theme>(() => {
       'absolute-tr': 'absolute-rt',
       'absolute-bl': 'absolute-lb',
       'absolute-br': 'absolute-rb',
+      'absolute-x-center': 'absolute left-1/2 -translate-x-1/2',
+      'absolute-y-center': 'absolute top-1/2 -translate-y-1/2',
       'absolute-center': 'absolute-lt flex-center size-full',
       'fixed-lt': 'fixed left-0 top-0',
       'fixed-lb': 'fixed left-0 bottom-0',
