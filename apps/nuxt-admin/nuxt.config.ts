@@ -4,17 +4,24 @@ export default defineNuxtConfig({
   pages: true,
   rootDir: process.cwd(),
   devtools: { enabled: true },
+  typescript: {
+    typeCheck: false
+  },
   modules: [
     '@pinia/nuxt',
     '@unocss/nuxt',
     ['unplugin-icons/nuxt', { autoInstall: true, compiler: 'vue3' }],
     '@pinia-orm/nuxt',
     '@vueuse/nuxt',
+    'nuxtjs-naive-ui',
   ],
   css: [
     '@unocss/reset/tailwind.css',
     '~/styles/main.css',
   ],
+  unocss: {
+    nuxtLayers: true,
+  },
   devServer: {
     host: '0.0.0.0',
     port: 3000,

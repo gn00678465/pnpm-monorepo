@@ -2,9 +2,10 @@ import { colord, extend } from 'colord'
 import namesPlugin from 'colord/plugins/names'
 import mixPlugin from 'colord/plugins/mix'
 import labPlugin from 'colord/plugins/lab'
+import a11yPlugin from 'colord/plugins/a11y'
 import type { AnyColor, HslColor, HsvColor, RgbColor } from 'colord'
 
-extend([namesPlugin, mixPlugin, labPlugin])
+extend([namesPlugin, mixPlugin, labPlugin, a11yPlugin])
 
 export function isValidColor(color: AnyColor): boolean {
   return colord(color).isValid()
@@ -88,6 +89,10 @@ export function transformColorWithOpacity(color: AnyColor, alpha: number, bgColo
  */
 export function isWhiteColor(color: AnyColor): boolean {
   return colord(color).isEqual('#ffffff')
+}
+
+export function getLuminance(color: AnyColor): number {
+  return colord(color).luminance()
 }
 
 export { colord }

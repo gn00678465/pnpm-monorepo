@@ -11,6 +11,7 @@ export default [
     rules: {
       ...tseslint.configs.recommended[0].rules,
       'no-unused-vars': 'off',
+      'no-redeclare': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
       'n/prefer-global/buffer': ['error', 'always'],

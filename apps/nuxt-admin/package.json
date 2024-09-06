@@ -15,8 +15,12 @@
   },
   "dependencies": {
     "@pnpm-monorepo/layouts": "workspace:*",
+    "@pnpm-monorepo/naive-ui-extension": "workspace:*",
     "@pnpm-monorepo/web-components": "workspace:*",
+    "@pnpm-monorepo/color": "workspace:*",
     "@unocss/reset": "^0.62.2",
+    "@vueuse/core": "^11.0.3",
+    "@vueuse/math": "^11.0.3",
     "nuxt": "^3.12.4",
     "vue": "latest"
   },
@@ -29,6 +33,9 @@
     "@pnpm-monorepo/uno-preset": "workspace:*",
     "@unocss/nuxt": "^0.62.3",
     "@vueuse/nuxt": "^11.0.3",
+    "naive-ui": "^2.39.0",
+    "nuxtjs-naive-ui": "^1.0.2",
+    "unocss": "^0.62.2",
     "unplugin-icons": "^0.19.2"
   }
 }
