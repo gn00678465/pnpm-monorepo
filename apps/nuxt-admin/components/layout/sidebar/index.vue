@@ -6,8 +6,6 @@ defineOptions({
   inheritAttrs: false
 })
 
-const router = useRouter()
-const adminRoutes = computed(() => router.options.routes.find((route) => route.path === '/admin')?.children ?? [])
 const props = withDefaults(defineProps<LayoutSidebarProps>(), {
   showExtra: true,
   title: 'Admin Dashboard',
@@ -15,7 +13,7 @@ const props = withDefaults(defineProps<LayoutSidebarProps>(), {
 });
 const { title, showExtra, headerHeight } = toRefs(props);
 
-const treeMenus = useMenus(adminRoutes)
+const { $treeMenus } = useNuxtApp()
 </script>
 
 <script lang="ts">
@@ -34,7 +32,7 @@ export interface LayoutSidebarProps {
         {{ title }}
       </h2>
     </NuxtLink>
-    <LayoutBaseMenu class="flex-grow w-full" :options="treeMenus" />
+    <LayoutBaseMenu class="flex-grow w-full" :options="$treeMenus" />
     <slot v-if="showExtra" name="extra" />
   </div>
 </template>

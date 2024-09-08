@@ -1,23 +1,26 @@
 import { transVueRoutesToMenu } from '@pnpm-monorepo/naive-ui-extension'
 import type { MenuOption } from 'naive-ui';
 import type { RouteRecordRaw, RouteMeta } from 'vue-router';
-import { iconMap } from '../assets/iconMap';
 import { NuxtLink } from '#components';
+import { iconMap } from '../assets/iconMap';
 
-export const useMenus = (routes: MaybeRefOrGetter<RouteRecordRaw[]>) => {
+export default defineNuxtPlugin(() => {
+  const router = useRouter()
+
+  const adminRoutes = computed(() => router.options.routes.find((route) => route.path === '/admin')?.children ?? [])
 
   const treeMenus = computed(() => {
-    return transVueRoutesToMenu<RouteRecordRaw, MenuOption>(toValue(routes), {
+    return transVueRoutesToMenu<RouteRecordRaw, MenuOption>(toValue(adminRoutes), {
       transform: addPartialProps,
       sortRoutes: sortRoutes
     }) as MenuOption[];
   });
 
   /**
- * 將 vue-route 的設定轉為 NaiveUI 的 menu 格式
- * @param route
- * @returns
- */
+* 將 vue-route 的設定轉為 NaiveUI 的 menu 格式
+* @param route
+* @returns
+*/
   function addPartialProps(route: RouteRecordRaw): MenuOption {
     const { meta, children } = route;
 
@@ -86,5 +89,9 @@ export const useMenus = (routes: MaybeRefOrGetter<RouteRecordRaw[]>) => {
     return 1;
   }
 
-  return treeMenus
-}
+  return {
+    provide: {
+      treeMenus
+    }
+  }
+})

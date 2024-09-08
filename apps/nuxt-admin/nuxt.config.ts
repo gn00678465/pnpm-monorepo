@@ -6,7 +6,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   typescript: {
     typeCheck: false,
-    includeWorkspace: true
+    includeWorkspace: true,
+    shim: false
   },
   modules: [
     '@pinia/nuxt',

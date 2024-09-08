@@ -15,6 +15,7 @@ import { addCssVarsToGlobal } from '@pnpm-monorepo/utility'
 
 export const useThemeStore = defineStore('theme-store', () => {
   const scope = effectScope();
+  const appConfig = useAppConfig()
   const layoutMode = ref<AdminLayoutProps['mode']>('vertical');
   const header = reactive({
     height: 68,
@@ -28,13 +29,13 @@ export const useThemeStore = defineStore('theme-store', () => {
   const { darkMode, toggleDarkMode } = useDarkMode();
 
   /** theme */
-  const themeColor = reactive({
+  const themeColor = reactive(Object.assign(appConfig.theme, {
     primary: '#1677ff',
     info: '#722ed1',
     success: '#52c41a',
     warning: '#faad14',
     error: '#f5222d'
-  })
+  }))
 
   const themeOverridesCommon = computed<GlobalThemeOverrides['common']>(() => ({
     ...createNaiveThemeColors(themeColor, { darkMode: false })

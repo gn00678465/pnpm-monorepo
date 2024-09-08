@@ -8,6 +8,25 @@ declare global {
   }
 }
 
+declare module '#app' {
+  interface NuxtApp {
+    $treeMenus: import('naive-ui').MenuOption[]
+  }
+}
+
+declare module 'nuxt/schema' {
+  interface AppConfigInput {
+    /** Theme configuration */
+    theme?: {
+      primary?: string
+      info?: string
+      success?: string
+      warning?: string
+      error?: string
+    }
+  }
+}
+
 declare module 'vue-router' {
   interface PageMeta {
     requiresAuth: boolean;
