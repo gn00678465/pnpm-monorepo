@@ -5,7 +5,10 @@ import {
   NConfigProvider,
   NMessageProvider,
   NNotificationProvider,
+  type NotificationProviderProps,
   configProviderProps,
+  useMessage,
+  useNotification,
 } from 'naive-ui'
 
 const props = defineProps({
@@ -14,16 +17,23 @@ const props = defineProps({
     type: Object as PropType<MessageProviderProps>,
     default: () => ({}),
   },
+  notificationProps: {
+    type: Object as PropType<NotificationProviderProps>,
+    default: () => ({}),
+  },
 })
 
 const Content = defineComponent({
   name: 'NaiveContentProvider',
-  setup(props) {
+  setup() {
+    window.$message = useMessage()
+    window.$notification = useNotification()
+
     return () => h('div')
   },
 })
 
-const { messageProps } = toRefs(props)
+const { messageProps, notificationProps } = toRefs(props)
 </script>
 
 <script lang="ts">
@@ -37,7 +47,7 @@ declare global {
 
 <template>
   <NConfigProvider v-bind="props">
-    <NNotificationProvider>
+    <NNotificationProvider v-bind="notificationProps">
       <NMessageProvider v-bind="messageProps">
         <slot />
         <Content />

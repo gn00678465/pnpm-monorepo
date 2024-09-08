@@ -4,7 +4,11 @@ defineOptions({
 })
 
 definePageMeta({
+  name: 'admin_dashboard',
   layout: false,
+  title: 'Dashboard',
+  sort: 1,
+  icon: 'material-symbols:dashboard'
 })
 </script>
 

@@ -8,6 +8,13 @@ defineOptions({
   name: 'AdminDesignPalette',
 })
 
+definePageMeta({
+  name: 'admin_design_pallette',
+  title: 'Design Pallette',
+  icon: 'material-symbols:palette-outline',
+  sort: 1,
+})
+
 const themeVars = useThemeVars()
 const [DefineColorPaletteTemplate, UseColorPaletteTemplate] = createReusableTemplate<{
   title: string
@@ -60,9 +67,9 @@ function getContrastingColor(background: string): string {
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-4 h-full">
+  <div class="flex flex-col gap-y-4">
     <DefineColorPaletteTemplate v-slot="{ title, primaryName, colors, showPrimary, renderItemName, renderHeaderName }">
-      <ul class="color-palette">
+      <ul class="color-palette group">
         <li class="color-palette__header"
           :style="{ backgroundColor: colors[primaryName], color: getContrastingColor(colors[primaryName]) }">
           <p class="color-palette__header-title">{{ title }}</p>
@@ -70,14 +77,17 @@ function getContrastingColor(background: string): string {
             <span class="color-palette__header-value-name">
               {{ renderHeaderName ? renderHeaderName(primaryName) : primaryName }}
             </span>
-            <span class="color-palette__header-value-color">{{ colors[primaryName]?.toUpperCase() }}</span>
+            <span
+              class="color-palette__header-value-color opacity-0 transition-opacity duration-300 group-hover:opacity-100">{{
+      colors[primaryName]?.toUpperCase() }}</span>
           </p>
         </li>
         <template v-for="(value, key) of colors" :key="key">
           <li v-if="key !== primaryName || showPrimary" class="color-palette__item"
             :style="`background-color: ${value};  color: ${getContrastingColor(value)}`">
             <p class="color-palette__item-label">{{ renderItemName ? renderItemName(key) : key }}</p>
-            <p class="color-palette__item-value">{{ value }}</p>
+            <p class="color-palette__item-value opacity-0 transition-opacity duration-300 group-hover:opacity-100">{{
+      value }}</p>
           </li>
         </template>
 

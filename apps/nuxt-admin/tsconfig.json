@@ -6,7 +6,8 @@
   ],
   "compilerOptions": {
     "types": [
-      "naive-ui/volar"
+      "naive-ui/volar",
+      "unplugin-icons/types/vue"
     ]
   }
 }

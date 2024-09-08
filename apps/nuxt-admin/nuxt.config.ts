@@ -5,7 +5,8 @@ export default defineNuxtConfig({
   rootDir: process.cwd(),
   devtools: { enabled: true },
   typescript: {
-    typeCheck: false
+    typeCheck: false,
+    includeWorkspace: true
   },
   modules: [
     '@pinia/nuxt',
@@ -22,6 +23,12 @@ export default defineNuxtConfig({
   unocss: {
     nuxtLayers: true,
   },
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: true,
+    },
+  ],
   devServer: {
     host: '0.0.0.0',
     port: 3000,

@@ -2,22 +2,29 @@ import type { GlobalThemeOverrides } from 'naive-ui'
 import { getAntdPaletteColorByNumber } from '@pnpm-monorepo/color'
 import type { NaiveColorAction, NaiveColorKey, NaiveThemeColor, NaiveThemeColorKey } from '../types'
 
+export interface CreateNaiveThemeColorsOptions {
+  darkMode?: boolean
+  backgroundColor?: string
+}
+
 /**
  * 產生 naive 用顏色
  * @param colors
- * @param darkMode
+ * @param {CreateNaiveThemeColorsOptions} options
+ * @param {boolean} [options.darkMode]
+ * @param {string} [options.backgroundColor]
  */
 export function createNaiveThemeColors(
   colors: NaiveThemeColor,
-  darkMode: boolean = false,
+  options: CreateNaiveThemeColorsOptions = {},
 ): GlobalThemeOverrides['common'] {
-  const options = darkMode ? { theme: 'dark' } as const : undefined
+  const opt = { theme: options.darkMode ? 'dark' : 'default', backgroundColor: options?.backgroundColor } as const
 
   const colorActions: NaiveColorAction[] = [
-    { scene: '', handler: color => getAntdPaletteColorByNumber(color, 5, options) || color },
-    { scene: 'Suppl', handler: color => getAntdPaletteColorByNumber(color, 4, options) || color },
-    { scene: 'Hover', handler: color => getAntdPaletteColorByNumber(color, 4, options) || color },
-    { scene: 'Pressed', handler: color => getAntdPaletteColorByNumber(color, 6, options) || color },
+    { scene: '', handler: color => getAntdPaletteColorByNumber(color, 5, opt) || color },
+    { scene: 'Suppl', handler: color => getAntdPaletteColorByNumber(color, 4, opt) || color },
+    { scene: 'Hover', handler: color => getAntdPaletteColorByNumber(color, 4, opt) || color },
+    { scene: 'Pressed', handler: color => getAntdPaletteColorByNumber(color, 6, opt) || color },
   ]
 
   const themeColors: GlobalThemeOverrides['common'] = {}
