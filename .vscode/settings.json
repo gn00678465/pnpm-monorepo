@@ -16,6 +16,8 @@
     "unplugin",
     "vueuse"
   ],
+  "vitest.workspaceConfig": "vitest.workspace.ts",
+  "vitest.rootConfig": "vitest.config.ts",
   "i18n-ally.sourceLanguage": "zhTW",
   "i18n-ally.displayLanguage": "zhTW",
   "i18n-ally.keystyle": "nested",

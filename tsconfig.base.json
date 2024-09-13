@@ -21,6 +21,9 @@
       ],
       "@pnpm-monorepo/color": [
         "packages/color/src/index.ts"
+      ],
+      "@pnpm-monorepo/composables": [
+        "packages/composables/lib/index.ts"
       ]
     },
     "declaration": false,

@@ -11,6 +11,11 @@ const baseConfig = antfu({
       },
     },
   },
+  ignores: [
+    '**/vitest.config.ts',
+    '**/vitest.workspace.ts',
+    '**/commitlint.config.ts',
+  ],
 }, ...eslintConfigBase)
 
 export default baseConfig
