@@ -7,7 +7,9 @@
   "keywords": [],
   "scripts": {
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage"
   },
   "exports": {
     ".": "./src/index.ts"

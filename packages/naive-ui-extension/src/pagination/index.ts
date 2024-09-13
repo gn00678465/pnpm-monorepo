@@ -1,2 +1,3 @@
 export * from './renderPaginationInfo'
-export * from './usePagination'
+export * from './useClientPagination'
+export * from './useNPagination'

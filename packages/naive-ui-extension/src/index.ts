@@ -1,7 +1,7 @@
-export * from './configProvider'
+export * from './config-provider'
+export * from './menu'
+export * from './pagination'
 export * from './theme'
 export * from './tree'
-export * from './pagination'
-export * from './menu'
 
 export type * from './types'

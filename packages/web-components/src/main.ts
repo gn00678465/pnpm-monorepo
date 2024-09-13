@@ -1,11 +1,11 @@
 import { CubeLoading } from './CubeLoading'
 
-const webComponentsMap = {
+export const webComponents = {
   'cube-loading': CubeLoading,
 }
 
-export function register(keys?: (keyof typeof webComponentsMap)[]) {
-  Object.entries(webComponentsMap).forEach(([key, component]) => {
+export function register(keys?: (keyof typeof webComponents)[]) {
+  Object.entries(webComponents).forEach(([key, component]) => {
     if (!keys || (Array.isArray(keys) && !keys.length)) {
       customElements.define(key, component)
     }
@@ -13,7 +13,7 @@ export function register(keys?: (keyof typeof webComponentsMap)[]) {
       keys
       && Array.isArray(keys)
       && keys.length
-      && keys.includes(key as keyof typeof webComponentsMap)
+      && keys.includes(key as keyof typeof webComponents)
     ) {
       customElements.define(key, component)
     }

@@ -1,6 +1,6 @@
 import { h } from 'vue'
-import type { VNode } from 'vue'
 import type { PaginationInfo } from 'naive-ui'
+import type { VNode } from 'vue'
 
 export function renderPaginationInfo(info: PaginationInfo): VNode
 export function renderPaginationInfo(info: PaginationInfo): VNode {

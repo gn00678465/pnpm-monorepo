@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Fragment, computed, h, toRefs, useAttrs } from 'vue'
-import type { AdminLayoutProps } from './types'
-import { LAYOUT_MAX_Z_INDEX, LAYOUT_SCROLL_EL_ID, bindClass, createLayoutCssVars } from './helpers'
+import { computed, Fragment, h, toRefs, useAttrs } from 'vue'
+import { bindClass, createLayoutCssVars, LAYOUT_MAX_Z_INDEX, LAYOUT_SCROLL_EL_ID } from './helpers'
 import style from './styles/index.module.css'
+import type { AdminLayoutProps } from './types'
 
 defineOptions({
   name: 'AdminLayout',
@@ -45,7 +45,7 @@ const {
   mobileSidebarClass,
 } = toRefs(props)
 
-const [sidebarCollapse] = defineModel<boolean>({ default: false })
+const [sidebarCollapse] = defineModel<boolean>('sidebarCollapse', { default: false })
 
 const cssVars = computed(() => createLayoutCssVars(props))
 
@@ -135,7 +135,7 @@ function layoutHeader() {
     }, slots.header?.()),
     h('div', {
       class: bindClass(['flex-shrink-0 overflow-hidden', style['admin-layout-header-placement']]),
-      style: { display: !fullContent.value && fixedHeaderAndTab ? 'initial' : 'none' },
+      style: { display: !fullContent.value && fixedHeaderAndTab.value ? 'initial' : 'none' },
     }),
   ])
 }
@@ -238,8 +238,7 @@ function handleClickMask() {
 
 <template>
   <div class="relative h-full" :class="[commonClass]" :style="cssVars" v-bind="attrs">
-    <div :id="isWrapperScroll ? scrollElId : undefined" class="h-full flex flex-col"
-      :class="[commonClass, scrollWrapperClass, { 'overflow-y-auto': isWrapperScroll }]">
+    <div :id="isWrapperScroll ? scrollElId : undefined" class="h-full flex flex-col" :class="[commonClass, scrollWrapperClass, { 'overflow-y-auto': isWrapperScroll }]">
       <!-- header -->
       <template v-if="showHeader">
         <component :is="layoutHeader" />
