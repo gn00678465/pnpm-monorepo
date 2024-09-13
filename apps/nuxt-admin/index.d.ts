@@ -1,35 +1,29 @@
-declare global {
-  const process: NodeJS.Process;
-  namespace NodeJS {
-    interface ProcessEnv {
-      readonly COOKIE_TOKEN_NAME: string;
-      readonly BASE_URL: string;
-    }
-  }
-}
-
 declare module '#app' {
   interface NuxtApp {
-    $treeMenus: import('naive-ui').MenuOption[]
+    $treeMenus: import('vue').ComputedRef<import('naive-ui').MenuOption[]>
   }
 }
 
 declare module 'nuxt/schema' {
-  interface AppConfigInput {
+  interface AppConfig {
     /** Theme configuration */
-    theme?: {
+    theme: {
       primary?: string
       info?: string
       success?: string
       warning?: string
       error?: string
     }
+    layout: Partial<import('./types/theme.type').ThemeLayout>
+    header: Partial<import('./types/theme.type').ThemeHeader>
+    sidebar: Partial<import('./types/theme.type').ThemeSidebar>
+    foobar: Partial<import('./types/theme.type').ThemeFooter>
   }
 }
 
 declare module 'vue-router' {
   interface PageMeta {
-    requiresAuth: boolean;
+    requiresAuth?: boolean;
     title: string;
     icon?: string;
     sort?: number;

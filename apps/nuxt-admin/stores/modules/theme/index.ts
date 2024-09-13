@@ -8,22 +8,21 @@ import {
 import { defineStore } from 'pinia';
 import type { GlobalThemeOverrides } from 'naive-ui';
 import { useDarkMode } from './useDarkMode';
-import type { AdminLayoutProps } from '@pnpm-monorepo/layouts';
+import type { LayoutMode } from '@pnpm-monorepo/layouts';
 import { createNaiveThemeColors } from '@pnpm-monorepo/naive-ui-extension';
 import { createAntdColorPalletteVars } from '@pnpm-monorepo/color'
 import { addCssVarsToGlobal } from '@pnpm-monorepo/utility'
+import type { ThemeLayout, ThemeFooter, ThemeHeader, ThemeSidebar } from '../../../types'
 
 export const useThemeStore = defineStore('theme-store', () => {
   const scope = effectScope();
   const appConfig = useAppConfig()
-  const layoutMode = ref<AdminLayoutProps['mode']>('vertical');
-  const header = reactive({
-    height: 68,
-    breadcrumb: {
-      visible: true,
-      showIcon: true
-    }
-  });
+  // layout
+  const fixedHeaderAndTab = ref(false)
+  const layout = reactive(appConfig.layout) as ThemeLayout
+  const header = reactive(appConfig.header) as ThemeHeader
+  const sidebar = reactive(appConfig.sidebar) as ThemeSidebar
+  const footer = reactive(appConfig.footer) as ThemeFooter
 
   /** dark mode */
   const { darkMode, toggleDarkMode } = useDarkMode();
@@ -50,8 +49,8 @@ export const useThemeStore = defineStore('theme-store', () => {
     scope.stop();
   });
 
-  function setThemeLayout(layout: AdminLayoutProps['mode']) {
-    layoutMode.value = layout
+  function setThemeLayout(_layout: LayoutMode) {
+    layout.mode = _layout
   }
 
   return {
@@ -59,9 +58,12 @@ export const useThemeStore = defineStore('theme-store', () => {
     darkMode,
     toggleDarkMode,
     // layout
-    layoutMode,
-    setThemeLayout,
+    layout,
+    fixedHeaderAndTab,
     header,
+    sidebar,
+    footer,
+    setThemeLayout,
     // theme
     themeColor,
     themeOverridesCommon

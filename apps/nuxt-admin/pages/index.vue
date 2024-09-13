@@ -3,7 +3,7 @@ definePageMeta({
   layout: false,
   name: 'IndexPage',
   keepalive: false,
-  redirect: () => ({ name: 'AuthLogin' }),
+  redirect: '/login',
 })
 </script>
 

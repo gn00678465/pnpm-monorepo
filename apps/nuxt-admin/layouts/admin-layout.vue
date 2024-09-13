@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { AdminLayout } from '@pnpm-monorepo/layouts'
-import { useThemeStore } from '../stores';
 
-const { layoutMode, header } = storeToRefs(useThemeStore());
+const appStore = useAppStore()
+const { layout, header, footer, fixedHeaderAndTab, sidebar } = storeToRefs(useThemeStore());
 </script>
 
 <script lang="ts">
 </script>
 
 <template>
-  <AdminLayout class="size-full" sidebar-class="bg-white" header-class="bg-white" content-class="" :mode="layoutMode"
-    :header-height="header.height" common-class="transition-all-300">
+  <AdminLayout
+    v-model:sidebar-collapse="appStore.sidebarCollapse" class="size-full" sidebar-class="bg-white" header-class="bg-white" content-class=""
+    :mode="layout.mode" :is-mobile="appStore.isMobile" :scroll-mode="layout.scrollMode" :header-height="header.height" :fixed-top="fixedHeaderAndTab"
+    :footer-visible="footer.visible" :footer-height="footer.height" :fixed-footer="footer.fixed" :right-footer="footer.right" :sidebar-width="sidebar.width" :sidebar-collapsed-width="sidebar.collapsedWidth">
     <template #header>
       header
     </template>

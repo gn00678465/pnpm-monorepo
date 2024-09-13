@@ -1,10 +1,13 @@
 import { effectScope, onScopeDispose, watch } from 'vue';
 import { defineStore } from 'pinia';
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
+import { useBoolean } from "@pnpm-monorepo/utility"
 import { useThemeStore } from '../theme';
 
 export const useAppStore = defineStore('app-store', () => {
   const themeStore = useThemeStore()
+
+  const { bool: sidebarCollapse, setBool: setSidebarCollapse, toggle: toggleSidebarCollapse } = useBoolean();
 
   const scope = effectScope();
   const breakpoints = useBreakpoints(breakpointsTailwind);
@@ -17,21 +20,25 @@ export const useAppStore = defineStore('app-store', () => {
     // watch isMobile, if is mobile, collapse sider
     watch(
       isMobile,
-      () => {
-        themeStore.setThemeLayout('vertical');
-        // setSiderCollapse(true);
+      newValue => {
+        if (newValue) {
+          themeStore.setThemeLayout('vertical');
+          setSidebarCollapse(true);
+        }
       },
       { immediate: true }
     );
-
-
-    /** On scope dispose */
-    onScopeDispose(() => {
-      scope.stop();
-    });
-
-    return {
-      isMobile
-    }
   })
+
+  /** On scope dispose */
+  onScopeDispose(() => {
+    scope.stop();
+  });
+
+  return {
+    isMobile,
+    sidebarCollapse,
+    setSidebarCollapse,
+    toggleSidebarCollapse
+  }
 })

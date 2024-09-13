@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { toRefs } from 'vue';
+import { storeToRefs } from 'pinia';
+import VerticalMenu from './modules/vertical-menu.vue';
 
 defineOptions({
   name: 'AdminSidebar',
@@ -12,8 +14,8 @@ const props = withDefaults(defineProps<LayoutSidebarProps>(), {
   headerHeight: 48
 });
 const { title, showExtra, headerHeight } = toRefs(props);
+const { layout } = storeToRefs(useThemeStore());
 
-const { $treeMenus } = useNuxtApp()
 </script>
 
 <script lang="ts">
@@ -32,7 +34,7 @@ export interface LayoutSidebarProps {
         {{ title }}
       </h2>
     </NuxtLink>
-    <LayoutBaseMenu class="flex-grow w-full" :options="$treeMenus" />
+    <VerticalMenu :mode="layout.mode" />
     <slot v-if="showExtra" name="extra" />
   </div>
 </template>

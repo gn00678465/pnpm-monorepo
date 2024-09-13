@@ -7,12 +7,12 @@
   "compilerOptions": {
     "types": [
       "naive-ui/volar",
-      "unplugin-icons/types/vue"
+      "unplugin-icons/types/vue",
     ],
     "paths": {
       "#app": [
         "./node_modules/nuxt/dist/app/index"
       ]
     }
-  }
+  },
 }
