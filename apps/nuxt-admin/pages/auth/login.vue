@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { NButton } from 'naive-ui';
+import { ref } from 'vue'
+import { Tabs, TabPanel, Card } from '@pnpm-monorepo/components'
 
 definePageMeta({
   layout: 'default',
@@ -7,16 +8,24 @@ definePageMeta({
   keepalive: false,
   alias: ['/login'],
 })
+
+const selectTab = ref('login')
 </script>
 
 <template>
-  <div>
-    <p class="header-6 text-32">login</p>
-    <br>
-    <NButton>NButton</NButton>
-    <NButton>NButton</NButton>
-    <NButton>NButton</NButton>
+  <div class="size-full relative flex-center">
+    <div class="w-120">
+      <Card class="relative" size="md" :theme-overrides="{ borderRadius: '10px' }">
+        <Tabs v-model:value="selectTab">
+          <TabPanel name="register" tab="Register" />
+          <TabPanel name="login" tab="Login" />
+        </Tabs>
+      </Card>
+    </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+
+</style>
