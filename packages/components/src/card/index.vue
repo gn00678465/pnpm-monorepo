@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, type CSSProperties, reactive, toRefs } from 'vue'
-import { processThemeVars } from '../utility'
+import { type CSSProperties, computed, reactive, toRefs } from 'vue'
+import { themeVarsToCssVars } from '../_utility'
 
 const props = withDefaults(defineProps<CardProps>(), {
   inverted: false,
@@ -24,22 +24,16 @@ const showElem = reactive({
 const style = computed(() => {
   return {
     '--bezier': 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-    ...Object.fromEntries(Object.entries(processThemeVars(size.value, ['sm', 'md', 'lg'], Object.assign(themeVars, themeOverrides.value)))),
+    ...Object.fromEntries(Object.entries(themeVarsToCssVars(size.value, ['sm', 'md', 'lg'], Object.assign(themeVars, themeOverrides.value)))),
   }
 })
 </script>
 
 <script lang="ts">
 const themeVars = {
-  paddingTopSm: '12px',
-  paddingBottomSm: '12px',
-  paddingLeftSm: '16px',
-  paddingTopMd: '19px',
-  paddingBottomMd: '20px',
-  paddingLeftMd: '24px',
-  paddingTopLg: '23px',
-  paddingBottomLg: '24px',
-  paddingLeftLg: '32px',
+  paddingSm: '12px 16px 12px',
+  paddingMd: '19px 24px 20px',
+  paddingLg: '23px 32px 24px',
   lineHeight: 1.6,
   fontSizeSm: '14px',
   fontSizeMd: '14px',
