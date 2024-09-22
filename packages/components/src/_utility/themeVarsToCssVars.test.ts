@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { themeVarsToCssVars } from './processThemeVars'
+import { themeVarsToCssVars } from './themeVarsToCssVars'
 
 const themeVars = {
   paddingSm: '12px 16px 12px',
@@ -19,7 +19,7 @@ const themeVars = {
 
 const sizes = ['sm', 'md', 'lg']
 
-describe('processThemeVars', () => {
+describe('themeVarsToCssVars', () => {
   it('processes theme vars for "sm" size with padding and margin', () => {
     const result = themeVarsToCssVars('sm', sizes, themeVars)
     expect(result).toEqual({
@@ -77,5 +77,22 @@ describe('processThemeVars', () => {
       paddingSm: '1px 2px 3px 4px 5px', // Invalid: too many values
     }
     expect(() => themeVarsToCssVars('sm', sizes, invalidThemeVars)).toThrow('Invalid spacing value')
+  })
+
+  it('processes theme vars for prefix with padding and margin', () => {
+    const result = themeVarsToCssVars('lg', sizes, themeVars, 'p')
+    expect(result).toEqual({
+      '--p-padding-top': '23px',
+      '--p-padding-bottom': '24px',
+      '--p-padding-left': '28px',
+      '--p-margin-top': '24px',
+      '--p-margin-bottom': '32px',
+      '--p-margin-left': '28px',
+      '--p-line-height': 1.6,
+      '--p-font-size': '18px',
+      '--p-border-radius': '3px',
+      '--p-font-weight': '400',
+      '--p-letter-spacing': '0.5px',
+    })
   })
 })
