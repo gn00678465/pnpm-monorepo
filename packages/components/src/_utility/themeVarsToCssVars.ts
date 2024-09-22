@@ -21,6 +21,7 @@ export function themeVarsToCssVars<T extends object, Size extends string>(
   size: Size,
   sizes: Size[],
   themeVars: T,
+  prefix?: string,
 ): Record<string, string | number> {
   const result: Record<string, string | number> = {}
   const sizeCapitalized = size.charAt(0).toUpperCase() + size.slice(1)
@@ -28,7 +29,7 @@ export function themeVarsToCssVars<T extends object, Size extends string>(
   for (const [key, value] of Object.entries(themeVars)) {
     if (key.endsWith(sizeCapitalized)) {
       const baseProp = key.slice(0, -size.length)
-      const cssVarName = `--${camelToKebab(baseProp)}`
+      const cssVarName = `--${prefix ? `${prefix}-` : ''}${camelToKebab(baseProp)}`
       if ((baseProp.startsWith('padding') || baseProp.startsWith('margin')) && typeof value === 'string') {
         const spacingValues = parseSpacingValue(value)
         for (const [side, sideValue] of Object.entries(spacingValues)) {

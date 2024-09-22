@@ -1,7 +1,25 @@
 <script lang="ts">
-import { computed, defineComponent, type PropType, ref, type RendererElement, type RendererNode, type VNode, watch } from 'vue'
-
+import { computed, defineComponent, type PropType, ref, type RendererElement, type RendererNode, toRefs, type VNode, watch } from 'vue'
+import { themeVarsToCssVars } from '../_utility'
 import TabPanel, { type TabPanelProps } from './TabPanel.vue'
+
+type Size = 'sm' | 'md' | 'lg'
+
+const themeVars = {
+  paddingSm: '4px',
+  paddingMd: '6px',
+  paddingLg: '8px',
+  fontSizeSm: '14px',
+  fontSizeMd: '14px',
+  fontSizeLg: '14px',
+  borderRadius: '4px',
+  textColor: 'rgb(51, 54, 57)',
+  gliderColor: '#FFF',
+  backgroundColor: 'rgb(247, 247, 250)',
+  darkTextColor: '#FFF',
+  darkGliderColor: 'rgba(255, 255, 255, 0.1)',
+  darkBackgroundColor: 'rgba(255, 255, 255, 0.1)',
+}
 
 export const tabsProps = {
   value: {
@@ -9,12 +27,12 @@ export const tabsProps = {
     default: undefined,
   },
   size: {
-    type: String as PropType<'sm' | 'md' | 'lg'>,
+    type: String as PropType<Size>,
     default: 'md',
   },
-  backgroundColor: {
-    type: String,
-    default: 'rgb(247, 247, 250)',
+  themeOverrides: {
+    type: Object as PropType<typeof themeVars>,
+    default: () => ({}),
   },
 }
 
@@ -25,19 +43,18 @@ export default defineComponent({
     'update:value': (value: string | number) => !!value,
   },
   setup(props, ctx) {
+    const { size, themeOverrides } = toRefs(props)
+
     const panels = computed<VNode<RendererNode, RendererElement, TabPanelProps>[]>(() => (ctx.slots.default?.() ?? []).filter(panel => panel.type === TabPanel))
     const panelNames = computed(() => panels.value.map(panel => panel.props?.name).filter(Boolean) as (string | number)[])
 
     const currentIndex = ref(0)
     const style = computed(() => ({
-      '--tab-padding': props.size === 'md' ? '6px 0' : props.size === 'lg' ? '8px 0' : props.size === 'sm' ? '4px 0' : '6px 0',
-      '--tab-font-size': '14px',
-      '--tab-bg-color': props.backgroundColor,
-      '--tab-glider-color': '#FFF',
-      '--tab-font-weight': 400,
-      '--tab-font-weight-active': 400,
-      '--tab-border-radius': '0.25rem',
-      '--tab-gap': '0px',
+      '--bezier': 'ease-in-out',
+      '--font-weight': 400,
+      '--font-weight-active': 400,
+      '--gap': '0px',
+      ...themeVarsToCssVars(size.value, ['sm', 'md', 'lg'], Object.assign(themeVars, themeOverrides.value)),
     }))
 
     if (props.value && panelNames.value.includes(props.value)) {
@@ -60,7 +77,7 @@ export default defineComponent({
 <template>
   <div class="tabs" :style="style">
     <template v-for="(panel, idx) of panels" :key="idx">
-      <component :is="panel" :style="currentIndex === idx && `font-weight: var(--tab-font-weight-active)`" @click="() => { currentIndex = idx }" />
+      <component :is="panel" :style="currentIndex === idx && `font-weight: var(--font-weight-active)`" @click="() => { currentIndex = idx }" />
     </template>
     <span class="glider" :style="`transform: translateX(${currentIndex * 100}%);`" />
   </div>
@@ -69,27 +86,27 @@ export default defineComponent({
 <style scoped>
 .tabs {
   display: flex;
-  gap: var(--tab-gap);
+  gap: var(--gap);
   position: relative;
-  background-color: var(--tab-bg-color);
+  background-color: light-dark(var(--background-color), var(--dark-background-color));
   box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
   padding: 0.25rem;
-  border-radius: var(--tab-border-radius);
-  font-size: var(--tab-font-size);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size);
   line-height: 1.5;
   letter-spacing: 0.02em;
   box-sizing: border-box;
-  font-weight: var(--tab-font-weight);
+  font-weight: var(--font-weight);
 
   .glider {
     position: absolute;
     display: flex;
     height: calc(100% - 8px);
     width: calc((100% - 8px) / v-bind('panels.length'));
-    background-color: var(--tab-glider-color);
+    background-color: light-dark(var(--glider-color), var(--dark-glider-color));
     z-index: 1;
-    border-radius: var(--tab-border-radius);
-    transition: 0.25s ease-out;
+    border-radius: var(--border-radius);
+    transition: all 0.25s var(--bezier);
   }
 }
 
@@ -101,14 +118,14 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--tab-padding);
   flex: 1 1 auto;
-  color: black;
+  padding: var(--padding-top) var(--padding-left) var(--padding-bottom) var(--padding-left);
+  color: light-dark(var(--text-color), var(--dark-text-color));
   font-weight: 500;
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius);
   border: none;
   cursor: pointer;
-  transition: color 0.15s ease-in;
+  transition: color 0.15s var(--bezier);
   user-select: none;
 }
 </style>

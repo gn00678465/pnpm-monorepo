@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type CSSProperties, computed, reactive, toRefs } from 'vue'
+import { computed, type CSSProperties, reactive, toRefs } from 'vue'
 import { themeVarsToCssVars } from '../_utility'
 
 const props = withDefaults(defineProps<CardProps>(), {
@@ -94,12 +94,12 @@ export interface CardProps {
   box-sizing: border-box;
   position: relative;
   word-break: break-word;
-  background-color: var(--color);
+  background-color: light-dark(var(--color), #252525);
   color: var(--text-color);
   transition: border-radius .5s var(--bezier);
 
   &.card--bordered {
-    border: 1px solid var(--border-color);
+    border: 1px solid light-dark(var(--border-color), #3d3c3c);
   }
 
   .card__header {
