@@ -6,7 +6,7 @@ export const monorepoPreset = definePreset((options: MonorepoPresetOptions = {})
   const { theme = {} } = options
 
   return {
-    name: 'monorepo-preset',
+    name: 'unocss-monorepo-preset',
     content: {
       pipeline: {
         exclude: ['node_modules', '.git', 'dist', '.nx'],
