@@ -1,19 +1,12 @@
-import { ref, watch, computed, onScopeDispose, effectScope } from 'vue';
-import {
-  useColorMode,
-  useCycleList,
-  type BasicColorSchema
-} from '@vueuse/core';
+import { ref, watch, computed, onScopeDispose, effectScope, type ComputedRef } from 'vue';
+import { useColorMode, useCycleList, type BasicColorSchema } from '@vueuse/core';
 
-export function useDarkMode() {
-  const defaultMode = ref<BasicColorSchema>('auto');
-  const modeList = ref<BasicColorSchema[]>(['dark', 'light', 'auto']);
+export function useDarkMode(): UseDarkModeReturn {
   const scope = effectScope();
+  const defaultMode = ref<BasicColorSchema>('auto');
+  const modeList = ref<BasicColorSchema[]>(['auto', 'light', 'dark']);
 
-  const colorMode = useColorMode({
-    initialValue: defaultMode.value,
-    emitAuto: true
-  });
+  const colorMode = useColorMode();
 
   const { state, next } = useCycleList(modeList, {
     initialValue: colorMode
@@ -33,8 +26,8 @@ export function useDarkMode() {
   });
 
   /** dark mode */
-  const darkMode = computed(() => {
-    const { system, store } = colorMode;
+  const darkMode = computed<boolean>(() => {
+    const { store, system } = colorMode
     if (state.value === 'auto') {
       return system.value === 'dark';
     }
@@ -51,7 +44,14 @@ export function useDarkMode() {
   });
 
   return {
+    themeScheme: colorMode.state,
     darkMode,
     toggleDarkMode
   };
+}
+
+export interface UseDarkModeReturn {
+  themeScheme: Ref<BasicColorSchema>
+  darkMode: ComputedRef<boolean>
+  toggleDarkMode: () => void
 }

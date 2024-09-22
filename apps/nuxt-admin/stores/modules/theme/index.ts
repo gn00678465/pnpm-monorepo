@@ -4,6 +4,7 @@ import {
   reactive,
   effectScope,
   onScopeDispose,
+  watch,
 } from 'vue';
 import { defineStore } from 'pinia';
 import type { GlobalThemeOverrides } from 'naive-ui';
@@ -25,7 +26,7 @@ export const useThemeStore = defineStore('theme-store', () => {
   const footer = reactive(appConfig.footer) as ThemeFooter
 
   /** dark mode */
-  const { darkMode, toggleDarkMode } = useDarkMode();
+  const { darkMode, toggleDarkMode, themeScheme } = useDarkMode();
 
   /** theme */
   const themeColor = reactive(Object.assign(appConfig.theme, {
@@ -37,12 +38,19 @@ export const useThemeStore = defineStore('theme-store', () => {
   }))
 
   const themeOverridesCommon = computed<GlobalThemeOverrides['common']>(() => ({
-    ...createNaiveThemeColors(themeColor, { darkMode: false })
+    ...createNaiveThemeColors(themeColor, { darkMode: darkMode.value })
   }))
 
   onBeforeMount(() => {
-    const data = createAntdColorPalletteVars(themeColor, { type: 'nested', theme: 'default' })
+    const data = createAntdColorPalletteVars(themeColor, { type: 'nested', theme: darkMode.value ? 'dark' : 'default' })
     addCssVarsToGlobal(data)
+  })
+
+  scope.run(() => {
+    watch(darkMode, (_darkMode) => {
+      const data = createAntdColorPalletteVars(themeColor, { type: 'nested', theme: _darkMode ? 'dark' : 'default' })
+      addCssVarsToGlobal(data)
+    })
   })
 
   onScopeDispose(() => {
@@ -55,6 +63,7 @@ export const useThemeStore = defineStore('theme-store', () => {
 
   return {
     // dark mode
+    themeScheme,
     darkMode,
     toggleDarkMode,
     // layout

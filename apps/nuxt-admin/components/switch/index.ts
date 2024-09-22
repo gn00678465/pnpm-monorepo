@@ -1,0 +1,1 @@
+export { default as DarkThemeSwitch } from './DarkThemeSwitch.vue'

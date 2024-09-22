@@ -5,7 +5,7 @@ import {
   presetUno,
   presetWebFonts,
 } from 'unocss'
-import { monorepoPreset, blackThemeColorPreset } from '@pnpm-monorepo/uno-preset'
+import { monorepoPreset, blackThemeColorPreset, iconAnimationPreset } from '@pnpm-monorepo/uno-preset'
 import { themeVars } from './theme/vars';
 
 export default defineConfig({
@@ -25,6 +25,7 @@ export default defineConfig({
         ...themeVars,
       }
     }),
-    blackThemeColorPreset()
+    blackThemeColorPreset(),
+    iconAnimationPreset()
   ],
 })
