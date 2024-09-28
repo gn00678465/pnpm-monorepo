@@ -4,29 +4,29 @@ import {
   reactive,
   effectScope,
   onScopeDispose,
-  watch,
+  watch
 } from 'vue';
 import { defineStore } from 'pinia';
 import type { GlobalThemeOverrides } from 'naive-ui';
-import { useDarkMode } from './useDarkMode';
 import type { LayoutMode } from '@pnpm-monorepo/layouts';
 import { createNaiveThemeColors } from '@pnpm-monorepo/naive-ui-extension';
 import { createAntdColorPalletteVars } from '@pnpm-monorepo/color'
 import { addCssVarsToGlobal } from '@pnpm-monorepo/utility'
-import type { ThemeLayout, ThemeFooter, ThemeHeader, ThemeSidebar } from '../../../types'
+import type { AppConfig } from '../../../types'
+import { useDarkMode } from './useDarkMode';
 
 export const useThemeStore = defineStore('theme-store', () => {
   const scope = effectScope();
   const appConfig = useAppConfig()
   // layout
   const fixedHeaderAndTab = ref(false)
-  const layout = reactive(appConfig.layout) as ThemeLayout
-  const header = reactive(appConfig.header) as ThemeHeader
-  const sidebar = reactive(appConfig.sidebar) as ThemeSidebar
-  const footer = reactive(appConfig.footer) as ThemeFooter
+  const layout = reactive(appConfig.layout) as AppConfig['layout']
+  const header = reactive(appConfig.header) as AppConfig['header']
+  const sidebar = reactive(appConfig.sidebar) as AppConfig['sidebar']
+  const footer = reactive(appConfig.footer) as AppConfig['footer']
 
   /** dark mode */
-  const { darkMode, toggleDarkMode, themeScheme } = useDarkMode();
+  const { darkMode, toggleThemeScheme, themeScheme } = useDarkMode()
 
   /** theme */
   const themeColor = reactive(Object.assign(appConfig.theme, {
@@ -37,21 +37,26 @@ export const useThemeStore = defineStore('theme-store', () => {
     error: '#f5222d'
   }))
 
+  const naiveThemeColors = computed(() => createNaiveThemeColors(themeColor, { darkMode: darkMode.value }))
+
+
   const themeOverridesCommon = computed<GlobalThemeOverrides['common']>(() => ({
-    ...createNaiveThemeColors(themeColor, { darkMode: darkMode.value })
+    ...naiveThemeColors.value
   }))
 
-  onBeforeMount(() => {
-    const data = createAntdColorPalletteVars(themeColor, { type: 'nested', theme: darkMode.value ? 'dark' : 'default' })
-    addCssVarsToGlobal(data)
-  })
 
   scope.run(() => {
-    watch(darkMode, (_darkMode) => {
-      const data = createAntdColorPalletteVars(themeColor, { type: 'nested', theme: _darkMode ? 'dark' : 'default' })
-      addCssVarsToGlobal(data)
-    })
+    if (import.meta.client) {
+      watch(darkMode, (_darkMode) => {
+        setColorPalletteToGlobal(_darkMode)
+      }, { immediate: true })
+    }
   })
+
+  function setColorPalletteToGlobal(darkMode: boolean) {
+    const data = createAntdColorPalletteVars(themeColor, { type: 'nested', theme: darkMode ? 'dark' : 'default', format: 'rgbString' })
+    addCssVarsToGlobal(data)
+  }
 
   onScopeDispose(() => {
     scope.stop();
@@ -63,9 +68,9 @@ export const useThemeStore = defineStore('theme-store', () => {
 
   return {
     // dark mode
-    themeScheme,
+    themeScheme: themeScheme,
     darkMode,
-    toggleDarkMode,
+    toggleThemeScheme,
     // layout
     layout,
     fixedHeaderAndTab,

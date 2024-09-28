@@ -10,7 +10,9 @@ import { themeVars } from './theme/vars';
 
 export default defineConfig({
   presets: [
-    presetUno({ dark: 'class' }),
+    presetUno({
+      dark: 'class'
+    }),
     presetAttributify(),
     presetTypography(),
     presetWebFonts({
@@ -23,7 +25,14 @@ export default defineConfig({
     monorepoPreset({
       theme: {
         ...themeVars,
-      }
+        breakpoints: {
+          sm: '640px',
+          md: '768px',
+          lg: '1024px',
+          xl: '1280px',
+          '2xl': '1536px'
+        },
+      },
     }),
     blackThemeColorPreset(),
     iconAnimationPreset()

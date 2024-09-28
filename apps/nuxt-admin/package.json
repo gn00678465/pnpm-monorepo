@@ -15,10 +15,10 @@
   },
   "dependencies": {
     "@pnpm-monorepo/color": "workspace:*",
+    "@pnpm-monorepo/components": "workspace:*",
     "@pnpm-monorepo/layouts": "workspace:*",
     "@pnpm-monorepo/naive-ui-extension": "workspace:*",
     "@pnpm-monorepo/web-components": "workspace:*",
-    "@pnpm-monorepo/components": "workspace:*",
     "@unocss/reset": "^0.62.2",
     "@vueuse/core": "^11.0.3",
     "@vueuse/math": "^11.0.3",

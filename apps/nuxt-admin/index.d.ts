@@ -5,20 +5,7 @@ declare module '#app' {
 }
 
 declare module 'nuxt/schema' {
-  interface AppConfig {
-    /** Theme configuration */
-    theme: {
-      primary?: string
-      info?: string
-      success?: string
-      warning?: string
-      error?: string
-    }
-    layout: Partial<import('./types/theme.type').ThemeLayout>
-    header: Partial<import('./types/theme.type').ThemeHeader>
-    sidebar: Partial<import('./types/theme.type').ThemeSidebar>
-    foobar: Partial<import('./types/theme.type').ThemeFooter>
-  }
+  type AppConfig = Partial<import('./types/theme.type.ts').AppConfig>
 }
 
 declare module 'vue-router' {

@@ -1,10 +1,18 @@
 export default defineAppConfig({
+  themeScheme: 'light',
   theme: {
     primary: '#1677ff',
     info: '#722ed1',
     success: '#52c41a',
     warning: '#faad14',
     error: '#f5222d'
+  },
+  breakpoints: {
+    sm: 640,
+    md: 768,
+    lg: 1024,
+    xl: 1280,
+    '2xl': 1536
   },
   layout: {
     mode: 'vertical',

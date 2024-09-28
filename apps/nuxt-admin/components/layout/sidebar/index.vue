@@ -30,7 +30,7 @@ export interface LayoutSidebarProps {
   <div class="size-full flex flex-col items-start justify-start w-full inline-block">
     <NuxtLink to="/" class="w-full flex-center overflow-hidden whitespace-nowrap flex-shrink-0"
       :style="{ height: headerHeight + 'px' }">
-      <h2 class="pl-8px text-base font-bold transition duration-300 ease-in-out">
+      <h2 class="pl-8px text-base font-bold transition duration-300 ease-in-out text-primary">
         {{ title }}
       </h2>
     </NuxtLink>

@@ -38,7 +38,7 @@ const selectTab = ref('login')
           </NFormItem>
         </NForm>
       </Card>
-      <DarkThemeSwitch class="absolute top-5 left-5"/>
+      <DarkThemeSwitch class="!absolute top-5 left-5" text/>
     </div>
   </div>
 </template>

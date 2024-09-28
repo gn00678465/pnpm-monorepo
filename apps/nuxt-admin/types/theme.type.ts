@@ -1,26 +1,36 @@
 import type { LayoutMode, LayoutScrollMode } from '@pnpm-monorepo/layouts';
 
-export interface ThemeLayout {
-  mode: LayoutMode
-  scrollMode: LayoutScrollMode
-}
+type BreakpointsKey = 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 
-export interface ThemeHeader {
-  height: number
-  breadcrumb: {
-    visible: boolean
-    showIcon: boolean
+export interface AppConfig {
+  themeScheme: 'light' | 'dark' | 'auto'
+  theme: {
+    primary: string
+    info: string
+    success: string
+    warning: string
+    error: string
   }
-}
-
-export interface ThemeSidebar {
-  width: number
-  collapsedWidth: number
-}
-
-export interface ThemeFooter {
-  visible: boolean
-  fixed: boolean
-  height: number
-  right: boolean
+  breakpoints: Record<BreakpointsKey, number>
+  layout: {
+    mode: LayoutMode
+    scrollMode: LayoutScrollMode
+  }
+  header: {
+    height: number
+    breadcrumb: {
+      visible: boolean
+      showIcon: boolean
+    }
+  }
+  sidebar: {
+    width: number
+    collapsedWidth: number
+  }
+  footer: {
+    visible: boolean
+    fixed: boolean
+    height: number
+    right: boolean
+  }
 }

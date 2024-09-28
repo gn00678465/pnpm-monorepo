@@ -7,7 +7,8 @@ import { useThemeStore } from './stores';
 
 const { themeOverridesCommon, darkMode } = storeToRefs(useThemeStore())
 
-const themeVars = useThemeVars();
+const appConfig = useAppConfig()
+const themeVars = useThemeVars()
 const themeOverrides = computed<GlobalThemeOverrides>(() => ({
   common: {
     fontFamily: `'Noto Sans TC', 'Roboto', ${themeVars.value.fontFamily}`,
@@ -15,12 +16,14 @@ const themeOverrides = computed<GlobalThemeOverrides>(() => ({
     ...themeOverridesCommon.value
   }
 }))
+
 </script>
 
 <template>
   <NuxtLoadingIndicator />
   <ClientOnly>
-    <NaiveConfigProvider :inline-theme-disabled="false" class="size-full" :theme="darkMode ? darkTheme : undefined" :theme-overrides="themeOverrides">
+    <NaiveConfigProvider :inline-theme-disabled="false" class="size-full" :theme="darkMode ? darkTheme : undefined" :theme-overrides="themeOverrides"
+    :breakpoints="appConfig.breakpoints">
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
