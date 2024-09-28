@@ -1,11 +1,12 @@
 interface GetCssVarsOptions {
+  styleId?: string
   keyHandler?: (...color: string[]) => string
   valueHandler?: (color: string) => string
 }
 
 function getCssVars<ThemeKey extends string = string>(
   theme: Record<ThemeKey, Record<string, string>>,
-  { keyHandler, valueHandler }: GetCssVarsOptions = {},
+  { keyHandler, valueHandler }: Omit<GetCssVarsOptions, 'styleId'> = {},
 ): string {
   keyHandler = (...keys: string[]) => {
     return `--${keys.join('-')}`
@@ -37,14 +38,14 @@ export function addCssVarsToGlobal<ThemeKey extends string = string>(
   theme: Record<ThemeKey, Record<string, string>>,
   options: GetCssVarsOptions = {},
 ): void {
-  const cssVarStr = getCssVars(theme, options)
+  const { styleId = 'theme-vars', ...ops } = options
+
+  const cssVarStr = getCssVars(theme, ops)
   const css = `
     :root {
       ${cssVarStr}
     }
   `
-
-  const styleId = 'theme-vars'
 
   const style = document.querySelector(`#${styleId}`) || document.createElement('style')
 

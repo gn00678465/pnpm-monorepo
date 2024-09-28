@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { type PropType, defineComponent, h, toRefs } from 'vue'
 import {
+  configProviderProps,
   type MessageProviderProps,
   NConfigProvider,
   NMessageProvider,
   NNotificationProvider,
   type NotificationProviderProps,
-  configProviderProps,
   useMessage,
   useNotification,
 } from 'naive-ui'
+import { defineComponent, h, onMounted, type PropType, toRefs } from 'vue'
 
 const props = defineProps({
   ...configProviderProps,
@@ -26,8 +26,10 @@ const props = defineProps({
 const Content = defineComponent({
   name: 'NaiveContentProvider',
   setup() {
-    window.$message = useMessage()
-    window.$notification = useNotification()
+    onMounted(() => {
+      window.$message = useMessage()
+      window.$notification = useNotification()
+    })
 
     return () => h('div')
   },

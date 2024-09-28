@@ -42,6 +42,7 @@ yarn-error.log
 testem.log
 /typings
 **/credentials.json
+**/vite.config.ts.timestamp-*
 
 # Environment
 **/.env
@@ -53,11 +54,3 @@ Thumbs.db
 .nx/cache
 
 storybook-static
-
-# Nuxt dev/build outputs
-.output
-.data
-.nuxt
-.nitro
-.cache
-dist

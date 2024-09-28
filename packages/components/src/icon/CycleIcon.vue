@@ -1,23 +1,39 @@
-<script setup lang="ts" generic="T extends string = string">
-import { computed, shallowRef, toRefs, toValue } from 'vue'
+<script setup lang="ts" generic="T extends string = string, Com extends Component = Component">
+import { type Component, computed, type PropType, shallowRef, toRefs, toValue, useAttrs, watchEffect } from 'vue'
+
+type InferComponentProps<T> = T extends new () => { $props: infer P } ? P : never
 
 interface SlotProps { width: string, height: string }
 
 type SlotIconTypes = Record<`icon-${T}`, (props: SlotProps) => any>
 
-const props = withDefaults(defineProps<CycleIconProps>(), {
-  size: 16,
+defineOptions({
+  name: 'CycleIcon',
+  inheritAttrs: false,
 })
 
+const props = defineProps({
+  size: {
+    type: Number,
+    default: 16,
+  },
+  tag: {
+    type: [String, Object] as PropType<string | Com>,
+    default: 'button',
+  },
+  componentProps: {
+    type: Object as PropType<Partial<InferComponentProps<Com>> & { [key: string]: any }>,
+    default: () => ({}),
+  },
+})
 const emits = defineEmits<{
-  next: []
+  next: [value: T]
 }>()
-
 const slots = defineSlots<SlotIconTypes>()
-
+const attrs = useAttrs()
 const [_value] = defineModel<T>('value', { default: undefined })
 
-const { size } = toRefs(props)
+const { size, tag, componentProps } = toRefs(props)
 
 const listRef = computed<T[]>(() => Object.keys(slots).filter(k => k !== 'default' && k.startsWith('icon-')).map(replaceIcon))
 const state = shallowRef<T>(getInitialValue())
@@ -36,6 +52,10 @@ const index = computed<number>({
   set(v) {
     set(v)
   },
+})
+
+watchEffect(() => {
+  state.value = getInitialValue()
 })
 
 function getInitialValue() {
@@ -61,23 +81,18 @@ function shift(delta = 1) {
 }
 
 function next(n = 1) {
-  emits('next')
-  return shift(n)
-}
-</script>
-
-<script lang="ts">
-interface CycleIconProps {
-  size?: number
+  const state = shift(n)
+  emits('next', state)
+  return state
 }
 </script>
 
 <template>
-  <button @click="() => { next() }">
+  <tag v-bind="{ ...attrs, ...componentProps }" @click="() => { next() }">
     <template v-for="(key) of listRef" :key="key">
       <slot v-if="state === key" :width="size" :height="size" :name="`icon-${key}`" />
     </template>
-  </button>
+  </tag>
 </template>
 
 <style scoped>

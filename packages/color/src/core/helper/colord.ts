@@ -1,9 +1,9 @@
-import { colord, extend } from 'colord'
-import namesPlugin from 'colord/plugins/names'
-import mixPlugin from 'colord/plugins/mix'
-import labPlugin from 'colord/plugins/lab'
-import a11yPlugin from 'colord/plugins/a11y'
 import type { AnyColor, HslColor, HsvColor, RgbColor } from 'colord'
+import { colord, extend } from 'colord'
+import a11yPlugin from 'colord/plugins/a11y'
+import labPlugin from 'colord/plugins/lab'
+import mixPlugin from 'colord/plugins/mix'
+import namesPlugin from 'colord/plugins/names'
 
 extend([namesPlugin, mixPlugin, labPlugin, a11yPlugin])
 
@@ -33,6 +33,10 @@ export function getDeltaE(color1: AnyColor, color2: AnyColor): number {
 
 export function transformHslToHex(color: HslColor): string {
   return colord(color).toHex()
+}
+
+export function transformHexToRgbString(color: AnyColor): string {
+  return colord(color).toRgbString()
 }
 
 /**
