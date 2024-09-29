@@ -3,7 +3,6 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   pages: true,
   rootDir: process.cwd(),
-  devtools: { enabled: true },
   typescript: {
     typeCheck: false,
     includeWorkspace: true,
@@ -37,4 +36,5 @@ export default defineNuxtConfig({
   hooks: {
     'pages:extend': function () { },
   },
+  devtools: { enabled: true },
 })
