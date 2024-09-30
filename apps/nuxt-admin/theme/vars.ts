@@ -2,31 +2,31 @@ import { createAntdColorPaletteUnocssThemeVars } from '@pnpm-monorepo/color/unoc
 
 const colors = ['primary', 'info', 'success', 'warning', 'error'];
 
-// function createNaiveUIColorPaletteVars() {
-//   const colors = ['primary', 'info', 'success', 'warning', 'error'];
-//   const colorPaletteScene = ['', 'hover', 'suppl', 'pressed'];
+function createNaiveUIColorPaletteVars() {
+  const colors = ['primary', 'info', 'success', 'warning', 'error'];
+  const colorPaletteScene = ['', 'hover', 'suppl', 'pressed'];
 
-//   const colorPaletteVar = {} as Record<string, Record<string, string>>;
+  const colorPaletteVar = {} as Record<string, Record<string, string>>;
 
-//   colors.forEach((color) => {
-//     colorPaletteVar[color] = colorPaletteScene.reduce((obj, scene) => {
-//       if (scene === '') {
-//         obj['DEFAULT'] = `var(--${color}-6)`
-//       } else {
-//         obj[`${scene}`] = `var(--${color}-${scene})`
-//       }
-//       return obj
-//     }, {} as Record<string, string>)
-//   });
+  colors.forEach((color) => {
+    colorPaletteVar[color] = colorPaletteScene.reduce((obj, scene) => {
+      if (scene === '') {
+        obj['DEFAULT'] = `var(--${color})`
+      } else {
+        obj[`${scene}`] = `var(--${color}-${scene})`
+      }
+      return obj
+    }, {} as Record<string, string>)
+  });
 
-//   return colorPaletteVar;
-// }
+  return colorPaletteVar;
+}
 
 /** Theme vars */
 export const themeVars: { colors: Record<string, string>, boxShadow: Record<string, string> } = {
   colors: {
-    ...createAntdColorPaletteUnocssThemeVars(colors, 6),
-    // ...createNaiveUIColorPaletteVars(),
+    ...createAntdColorPaletteUnocssThemeVars(colors),
+    ...createNaiveUIColorPaletteVars(),
     nprogress: 'rgb(var(--nprogress-color))',
     container: 'rgb(var(--container-bg-color))',
     layout: 'rgb(var(--layout-bg-color))',

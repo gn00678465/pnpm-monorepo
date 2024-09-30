@@ -11,12 +11,12 @@ import type { GlobalThemeOverrides } from 'naive-ui';
 import type { LayoutMode } from '@pnpm-monorepo/layouts';
 import { createNaiveThemeColors } from '@pnpm-monorepo/naive-ui-extension';
 import { createAntdColorPalletteVars } from '@pnpm-monorepo/color'
-import { addCssVarsToGlobal } from '@pnpm-monorepo/utility'
+import { addCssVarsToGlobal, camelToKebab } from '@pnpm-monorepo/utility'
 import type { AppConfig } from '../../../types'
 import { useDarkMode } from './useDarkMode';
 
 export const useThemeStore = defineStore('theme-store', () => {
-  const scope = effectScope();
+  const scope = effectScope()
   const appConfig = useAppConfig()
   // layout
   const fixedHeaderAndTab = ref(false)
@@ -55,7 +55,8 @@ export const useThemeStore = defineStore('theme-store', () => {
 
   function setColorPalletteToGlobal(darkMode: boolean) {
     const data = createAntdColorPalletteVars(themeColor, { type: 'nested', theme: darkMode ? 'dark' : 'default', format: 'rgbString' })
-    addCssVarsToGlobal(data)
+    const naiveData = Object.fromEntries(Object.entries(naiveThemeColors.value as Record<string, string>).map(([key, _]) => [camelToKebab(key.replace('Color', '')), _]))
+    addCssVarsToGlobal([data, naiveData])
   }
 
   onScopeDispose(() => {
