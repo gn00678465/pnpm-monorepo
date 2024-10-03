@@ -9,7 +9,11 @@ import {
   useMessage,
   useNotification,
 } from 'naive-ui'
-import { defineComponent, h, onMounted, type PropType, toRefs } from 'vue'
+import { defineComponent, h, onMounted, type PropType, toRefs, useAttrs } from 'vue'
+
+defineOptions({
+  inheritAttrs: false,
+})
 
 const props = defineProps({
   ...configProviderProps,
@@ -22,6 +26,8 @@ const props = defineProps({
     default: () => ({}),
   },
 })
+
+const attrs = useAttrs()
 
 const Content = defineComponent({
   name: 'NaiveContentProvider',
@@ -48,7 +54,7 @@ declare global {
 </script>
 
 <template>
-  <NConfigProvider v-bind="props">
+  <NConfigProvider v-bind="{ ...props, ...attrs }">
     <NNotificationProvider v-bind="notificationProps">
       <NMessageProvider v-bind="messageProps">
         <slot />

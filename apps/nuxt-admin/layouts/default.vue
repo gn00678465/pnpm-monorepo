@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="size-full">
+  <div class="size-full dark:bg-[var(--bg-color-1)]">
     <slot />
   </div>
 </template>

@@ -87,6 +87,9 @@ importers:
       '@pnpm-monorepo/naive-ui-extension':
         specifier: workspace:*
         version: link:../../packages/naive-ui-extension
+      '@pnpm-monorepo/utility':
+        specifier: workspace:*
+        version: link:../../packages/utility
       '@pnpm-monorepo/web-components':
         specifier: workspace:*
         version: link:../../packages/web-components

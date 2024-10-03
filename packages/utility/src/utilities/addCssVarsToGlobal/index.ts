@@ -1,5 +1,10 @@
 interface GetCssVarsOptions {
+  /**
+   * Media query for styles to apply
+   */
+  media?: string
   styleId?: string
+  darkClass?: string
   keyHandler?: (...color: string[]) => string
   valueHandler?: (color: string) => string
 }
@@ -19,7 +24,7 @@ function isNested(theme: ThemeRecord, key: keyof ThemeRecord): theme is ThemeNes
 
 function getCssVars(
   theme: ThemeRecord,
-  { keyHandler, valueHandler }: Omit<GetCssVarsOptions, 'styleId'> = {},
+  { keyHandler, valueHandler }: Omit<GetCssVarsOptions, 'styleId' | 'darkClass' | 'media'> = {},
 ): string {
   keyHandler = (...keys: string[]) => {
     return `--${keys.join('-')}`
@@ -45,29 +50,40 @@ function getCssVars(
 /**
  * 將 css 變數綁訂到 document style 上
  * @param theme
+ * @param darkTheme
  * @param options
  */
 export function addCssVarsToGlobal(
   theme: ThemeRecord,
+  darkTheme: ThemeRecord,
   options?: GetCssVarsOptions,
 ): void
 export function addCssVarsToGlobal(
   theme: ThemeRecord[],
+  darkTheme: ThemeRecord[],
   options?: GetCssVarsOptions,
 ): void
 export function addCssVarsToGlobal(
   theme: ThemeRecord | ThemeRecord[],
+  darkTheme: ThemeRecord | ThemeRecord[],
   options: GetCssVarsOptions = {},
 ): void {
-  const { styleId = 'theme-vars', ...ops } = options
+  const { styleId = 'theme-vars', darkClass = 'dark', media, ...ops } = options
 
   let cssVarStr: string | undefined
+  let darkCssVarStr: string | undefined
 
   if (Array.isArray(theme)) {
     cssVarStr = theme.map(t => getCssVars(t, ops)).join(';')
   }
+  if (Array.isArray(darkTheme)) {
+    darkCssVarStr = darkTheme.map(t => getCssVars(t, ops)).join(';')
+  }
   if (typeof theme === 'object' && !Array.isArray(theme)) {
     cssVarStr = getCssVars(theme, ops)
+  }
+  if (typeof darkTheme === 'object' && !Array.isArray(darkTheme)) {
+    darkCssVarStr = getCssVars(darkTheme, ops)
   }
 
   if (cssVarStr) {
@@ -77,12 +93,22 @@ export function addCssVarsToGlobal(
     }
   `
 
-    const style = document.querySelector(`#${styleId}`) || document.createElement('style')
+    const darkCss = `
+    :root.${darkClass} {
+      ${darkCssVarStr}
+    }
+  `
 
-    style.id = styleId
+    const style = (document.querySelector(`#${styleId}`) || document.createElement('style')) as HTMLStyleElement
 
-    style.textContent = css
+    if (!style.isConnected) {
+      style.id = styleId
+      if (media)
+        style.media = media
 
-    document.head.appendChild(style)
+      document.head.appendChild(style)
+    }
+
+    style.textContent = css + darkCss
   }
 }

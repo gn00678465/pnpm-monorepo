@@ -18,7 +18,7 @@ const selectTab = ref('login')
 <template>
   <div class="size-full relative flex-center">
     <div class="w-102 relative">
-      <Card class="relative !dark:bg-outer-space !dark:border-[#3d3c3c]" size="lg" content-class="space-y-6" :theme-overrides="{ borderRadius: '10px' }">
+      <Card class="relative  !dark:border-[#3d3c3c]" size="lg" content-class="space-y-6" :theme-overrides="{ borderRadius: '0.75rem', color: 'var(--bg-color-2)' }">
         <div class="text-center">
           <p class="title !dark:text-white">
             <template v-if="selectTab === 'login'">Login to your Account</template>
@@ -26,7 +26,7 @@ const selectTab = ref('login')
           </p>
           <span class="subtitle !dark:text-white">Get started with our app, just create an account and enjoy the experience.</span>
         </div>
-        <Tabs v-model:value="selectTab">
+        <Tabs v-model:value="selectTab" :theme-overrides="{ }">
           <TabPanel name="register" tab="Register" />
           <TabPanel name="login" tab="Login" />
         </Tabs>

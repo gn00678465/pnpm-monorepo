@@ -13,7 +13,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div>
+  <div class="dark:text-primary text-primary">
     Dashboard
   </div>
 </template>

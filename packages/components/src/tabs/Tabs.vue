@@ -16,9 +16,6 @@ const themeVars = {
   textColor: 'rgb(51, 54, 57)',
   gliderColor: '#FFF',
   backgroundColor: 'rgb(247, 247, 250)',
-  darkTextColor: '#FFF',
-  darkGliderColor: 'rgba(255, 255, 255, 0.1)',
-  darkBackgroundColor: 'rgba(255, 255, 255, 0.1)',
 }
 
 export const tabsProps = {
@@ -31,13 +28,14 @@ export const tabsProps = {
     default: 'md',
   },
   themeOverrides: {
-    type: Object as PropType<typeof themeVars>,
+    type: Object as PropType<Partial<typeof themeVars>>,
     default: () => ({}),
   },
 }
 
 export default defineComponent({
   name: 'Tabs',
+  inheritAttrs: false,
   props: tabsProps,
   emits: {
     'update:value': (value: string | number) => !!value,
@@ -46,15 +44,17 @@ export default defineComponent({
     const { size, themeOverrides } = toRefs(props)
 
     const panels = computed<VNode<RendererNode, RendererElement, TabPanelProps>[]>(() => (ctx.slots.default?.() ?? []).filter(panel => panel.type === TabPanel))
-    const panelNames = computed(() => panels.value.map(panel => panel.props?.name).filter(Boolean) as (string | number)[])
+    const panelNames = computed(() => panels.value.filter(panel => !panel.props?.disabled).map(panel => panel.props?.name).filter(Boolean) as (string | number)[])
+
+    const _themeVars = computed(() => Object.assign(themeVars, themeOverrides.value))
 
     const currentIndex = ref(0)
     const style = computed(() => ({
       '--bezier': 'ease-in-out',
       '--font-weight': 400,
-      '--font-weight-active': 400,
+      '--font-weight-active': 500,
       '--gap': '0px',
-      ...themeVarsToCssVars(size.value, ['sm', 'md', 'lg'], Object.assign(themeVars, themeOverrides.value)),
+      ...themeVarsToCssVars(size.value, ['sm', 'md', 'lg'], _themeVars.value),
     }))
 
     if (props.value && panelNames.value.includes(props.value)) {
@@ -65,19 +65,26 @@ export default defineComponent({
       ctx.emit('update:value', panelNames.value[_])
     }, { immediate: true })
 
+    function onClick(idx: number, panel: VNode<RendererNode, RendererElement, TabPanelProps>) {
+      if (panel.props?.disabled)
+        return
+      currentIndex.value = idx
+    }
+
     return {
       panels,
       currentIndex,
       style,
+      onClick,
     }
   },
 })
 </script>
 
 <template>
-  <div class="tabs" :style="style">
+  <div class="tabs" role="tablist" :style="{ ...style, gridTemplateColumns: `repeat(${panels.length}, minmax(0, 1fr))` }">
     <template v-for="(panel, idx) of panels" :key="idx">
-      <component :is="panel" :style="currentIndex === idx && `font-weight: var(--font-weight-active)`" @click="() => { currentIndex = idx }" />
+      <component :is="panel" role="tab" :aria-selected="currentIndex === idx" @click="() => { onClick(idx, panel) }" />
     </template>
     <span class="glider" :style="`transform: translateX(${currentIndex * 100}%);`" />
   </div>
@@ -85,10 +92,10 @@ export default defineComponent({
 
 <style scoped>
 .tabs {
-  display: flex;
+  display: grid;
   gap: var(--gap);
   position: relative;
-  background-color: light-dark(var(--background-color), var(--dark-background-color));
+  background-color: var(--background-color);
   box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
   padding: 0.25rem;
   border-radius: var(--border-radius);
@@ -99,11 +106,15 @@ export default defineComponent({
   font-weight: var(--font-weight);
 
   .glider {
+    --padding-x: 4px;
+    --padding-y: 3px;
     position: absolute;
+    left: var(--padding-x);
+    top: var(--padding-y);
     display: flex;
-    height: calc(100% - 8px);
-    width: calc((100% - 8px) / v-bind('panels.length'));
-    background-color: light-dark(var(--glider-color), var(--dark-glider-color));
+    width: calc((100% - calc(var(--padding-x) * 2)) / v-bind('panels.length'));
+    height: calc(100% - calc(var(--padding-y) * 2));
+    background-color: var(--glider-color);
     z-index: 1;
     border-radius: var(--border-radius);
     transition: all 0.25s var(--bezier);
@@ -118,14 +129,20 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1 1 auto;
   padding: var(--padding-top) var(--padding-left) var(--padding-bottom) var(--padding-left);
-  color: light-dark(var(--text-color), var(--dark-text-color));
+  color: var(--text-color);
   font-weight: 500;
   border-radius: var(--border-radius);
   border: none;
   cursor: pointer;
-  transition: color 0.15s var(--bezier);
+  transition: all 0.15s var(--bezier);
+  -webkit-user-select: none;
   user-select: none;
+  &.disabled {
+    cursor: not-allowed;
+  }
+  &[aria-selected='true'] {
+    font-weight: var(--font-weight-active);
+  }
 }
 </style>

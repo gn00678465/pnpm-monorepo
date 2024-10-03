@@ -21,10 +21,12 @@ const showElem = reactive({
   footer: computed(() => !!slots.footer),
 })
 
+const _themeVars = computed(() => Object.assign(themeVars, themeOverrides.value))
+
 const style = computed(() => {
   return {
     '--bezier': 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-    ...Object.fromEntries(Object.entries(themeVarsToCssVars(size.value, ['sm', 'md', 'lg'], Object.assign(themeVars, themeOverrides.value)))),
+    ...Object.fromEntries(Object.entries(themeVarsToCssVars(size.value, ['sm', 'md', 'lg'], _themeVars.value))),
   }
 })
 </script>
@@ -94,12 +96,12 @@ export interface CardProps {
   box-sizing: border-box;
   position: relative;
   word-break: break-word;
-  background-color: light-dark(var(--color), #252525);
+  background-color: var(--color);
   color: var(--text-color);
   transition: border-radius .5s var(--bezier);
 
   &.card--bordered {
-    border: 1px solid light-dark(var(--border-color), #3d3c3c);
+    border: 1px solid var(--border-color);
   }
 
   .card__header {

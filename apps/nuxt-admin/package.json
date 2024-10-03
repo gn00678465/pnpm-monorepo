@@ -20,6 +20,7 @@
     "@pnpm-monorepo/layouts": "workspace:*",
     "@pnpm-monorepo/naive-ui-extension": "workspace:*",
     "@pnpm-monorepo/web-components": "workspace:*",
+    "@pnpm-monorepo/utility": "workspace:*",
     "@unocss/reset": "^0.62.4",
     "@vueuse/core": "^11.1.0",
     "@vueuse/math": "^11.1.0",

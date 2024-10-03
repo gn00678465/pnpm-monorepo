@@ -5,11 +5,11 @@ export interface UseDarkModeOptions {
   storage?: 'localStorage' | 'sessionStorage'
   classPrefix?: string
   classSuffix?: string
+  darkClass?: string
 }
 
 export function useDarkMode(options: UseDarkModeOptions = {}): UseDarkModeReturn {
-  const DARK_CLASS = 'dark'
-  const { storage = 'localStorage', classPrefix = '', classSuffix = '' } = options
+  const { storage = 'localStorage', classPrefix = '', classSuffix = '', darkClass = 'dark' } = options
 
   const scope = effectScope()
 
@@ -62,11 +62,11 @@ export function useDarkMode(options: UseDarkModeOptions = {}): UseDarkModeReturn
   })
 
   function toggleCssDarkMode(darkMode = false) {
-    const darkClass = classPrefix + DARK_CLASS + classSuffix
+    const _darkClass = classPrefix + darkClass + classSuffix
     if (darkMode) {
-      document.documentElement.classList.add(darkClass);
+      document.documentElement.classList.add(_darkClass);
     } else {
-      document.documentElement.classList.remove(darkClass);
+      document.documentElement.classList.remove(_darkClass);
     }
   }
 

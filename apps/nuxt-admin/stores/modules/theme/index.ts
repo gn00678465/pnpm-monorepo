@@ -37,26 +37,35 @@ export const useThemeStore = defineStore('theme-store', () => {
     error: '#f5222d'
   }))
 
-  const naiveThemeColors = computed(() => createNaiveThemeColors(themeColor, { darkMode: darkMode.value }))
-
 
   const themeOverridesCommon = computed<GlobalThemeOverrides['common']>(() => ({
-    ...naiveThemeColors.value
+    ...createNaiveThemeColors(themeColor, { darkMode: darkMode.value })
   }))
 
 
   scope.run(() => {
     if (import.meta.client) {
-      watch(darkMode, (_darkMode) => {
-        setColorPalletteToGlobal(_darkMode)
+      watch(themeColor, () => {
+        setColorPalletteToGlobal()
       }, { immediate: true })
     }
   })
 
-  function setColorPalletteToGlobal(darkMode: boolean) {
-    const data = createAntdColorPalletteVars(themeColor, { type: 'nested', theme: darkMode ? 'dark' : 'default', format: 'rgbString' })
-    const naiveData = Object.fromEntries(Object.entries(naiveThemeColors.value as Record<string, string>).map(([key, _]) => [camelToKebab(key.replace('Color', '')), _]))
-    addCssVarsToGlobal([data, naiveData])
+  function createTheme(darkMode: boolean = false, backgroundColor: string = '#fff') {
+    const theme = createAntdColorPalletteVars(themeColor, { type: 'nested', theme: darkMode ? 'dark' : 'default', format: 'hex', backgroundColor })
+    const naiveTheme = Object.fromEntries(
+      Object.entries(
+        createNaiveThemeColors(themeColor, { darkMode: darkMode, backgroundColor }) as Record<string, string>)
+        .map(([key, _]) => [camelToKebab(key.replace('Color', '')), _]
+        )
+    )
+    return { theme, naiveTheme }
+  }
+
+  function setColorPalletteToGlobal() {
+    const theme = createTheme()
+    const darkTheme = createTheme(true, '#121212')
+    addCssVarsToGlobal([theme.theme, theme.naiveTheme], [darkTheme.theme, darkTheme.naiveTheme])
   }
 
   onScopeDispose(() => {
