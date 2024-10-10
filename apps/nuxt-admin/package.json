@@ -21,6 +21,7 @@
     "@pnpm-monorepo/naive-ui-extension": "workspace:*",
     "@pnpm-monorepo/web-components": "workspace:*",
     "@pnpm-monorepo/utility": "workspace:*",
+    "@pnpm-monorepo/eve-ui-kit": "workspace:*",
     "@unocss/reset": "^0.62.4",
     "@vueuse/core": "^11.1.0",
     "@vueuse/math": "^11.1.0",

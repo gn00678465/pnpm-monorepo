@@ -5,7 +5,7 @@ import { useThemeVars, darkTheme, type GlobalThemeOverrides } from 'naive-ui';
 import { NaiveConfigProvider } from '@pnpm-monorepo/naive-ui-extension';
 import { useThemeStore } from './stores';
 
-const { themeOverridesCommon, darkMode } = storeToRefs(useThemeStore())
+const { darkMode, lightThemeOverrideCommon, darkThemeOverrideCommon } = storeToRefs(useThemeStore())
 
 const appConfig = useAppConfig()
 const themeVars = useThemeVars()
@@ -13,7 +13,7 @@ const themeOverrides = computed<GlobalThemeOverrides>(() => ({
   common: {
     fontFamily: `'Noto Sans TC', 'Roboto', ${themeVars.value.fontFamily}`,
     fontFamilyMono: `'Fira Code', 'Fira Mono', ${themeVars.value.fontFamilyMono}`,
-    ...themeOverridesCommon.value
+    ...(darkMode.value ? darkThemeOverrideCommon.value : lightThemeOverrideCommon.value)
   }
 }))
 
