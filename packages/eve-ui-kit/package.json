@@ -1,5 +1,5 @@
 {
-  "name": "@pnpm-monorepo/color",
+  "name": "@pnpm-monorepo/eve-ui-kit",
   "version": "1.0.0",
   "description": "",
   "author": "",
@@ -10,7 +10,9 @@
     "lint:fix": "eslint . --fix"
   },
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/core/index.ts",
+    "./unocss": "./src/unocss/index.ts",
+    "./naive-ui": "./src/naive-ui/index.ts"
   },
   "main": "index.js",
   "typesVersions": {
@@ -20,8 +22,11 @@
       ]
     }
   },
-  "dependencies": {
-    "@ant-design/colors": "^7.1.0",
-    "colord": "^2.9.3"
+  "devDependencies": {
+    "@pnpm-monorepo/color": "workspace:*"
+  },
+  "peerDependencies": {
+    "unocss": "latest",
+    "naive-ui": "latest"
   }
 }

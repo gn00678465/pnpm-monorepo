@@ -1,8 +1,8 @@
 import type { Preset } from 'unocss'
 
-export function iconAnimationPreset(): Preset {
+export function presetAnimation(): Preset {
   return {
-    name: 'unocss-icon-animation-preset',
+    name: 'unocss-preset-animation',
     preflights: [
       {
         getCSS: () => `

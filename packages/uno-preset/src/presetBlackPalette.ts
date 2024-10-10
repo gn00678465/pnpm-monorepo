@@ -24,9 +24,9 @@ export type BlackThemeColorKeys =
   'black-olive' |
   'midnight-blue'
 
-export const blackThemeColorPreset = definePreset(() => {
+export const presetBlackPalette = definePreset(() => {
   return {
-    name: 'unocss-black-theme-color-preset',
+    name: 'unocss-preset-black-palette',
     theme: {
       colors: {
         'charcoal-gray': '#121212',

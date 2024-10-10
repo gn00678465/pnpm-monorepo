@@ -1,19 +1,15 @@
 // @unocss-include
 import { definePreset, transformerDirectives, transformerVariantGroup } from 'unocss'
-import type { MonorepoPresetOptions } from './types'
 
-export const monorepoPreset = definePreset((options: MonorepoPresetOptions = {}) => {
-  const { theme = {} } = options
-
+export const presetUtilities = definePreset(() => {
   return {
-    name: 'unocss-monorepo-preset',
+    name: 'unocss-preset-utilities',
     content: {
       pipeline: {
         exclude: ['node_modules', '.git', 'dist', '.nx'],
       },
     },
     transformers: [transformerDirectives(), transformerVariantGroup()],
-    theme,
     shortcuts: {
       // size
       'size-0': 'w-0 h-0',
@@ -45,7 +41,7 @@ export const monorepoPreset = definePreset((options: MonorepoPresetOptions = {})
       'absolute-br': 'absolute-rb',
       'absolute-x-center': 'absolute left-1/2 -translate-x-1/2',
       'absolute-y-center': 'absolute top-1/2 -translate-y-1/2',
-      'absolute-center': 'absolute-lt flex-center size-full',
+      'absolute-center': 'absolute-x-center absolute-y-center',
       'fixed-lt': 'fixed left-0 top-0',
       'fixed-lb': 'fixed left-0 bottom-0',
       'fixed-rt': 'fixed right-0 top-0',

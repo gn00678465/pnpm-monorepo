@@ -22,8 +22,7 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "src/**/*",
-    "unocss/**/*"
+    "src/**/*"
   ],
   "exclude": [
     "node_modules",

@@ -12,7 +12,8 @@
     "test:coverage": "vitest --coverage"
   },
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./unocss": "./unocss/index.ts"
   },
   "main": "index.js",
   "typesVersions": {
